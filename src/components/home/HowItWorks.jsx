@@ -3,9 +3,9 @@ import { MdOutlineQuiz } from "react-icons/md";
 
 const HowItWorks = () => {
     return (
-        <div className="mt-16">
+        <div className="py-16 bg-light">
             <div>
-                <h2 className="text-4xl text-center font-bold text-secondary mb-4">
+                <h2 className="text-4xl text-center font-bold text-secondary pt-5 mb-4">
                     How It Works
                 </h2>
                 <p className="text-center text-gray-500 md:w-8/12 mx-auto mb-16">
@@ -80,6 +80,7 @@ const HowItWorks = () => {
                             <p className="text-gray-600">                        Visualize learning trends and improvements with saved results.
                             </p>
                         </div>
+                    <hr />
                 </li>
             </ul>
         </div>

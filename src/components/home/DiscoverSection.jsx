@@ -32,7 +32,7 @@ const DiscoverSection = () => {
   });
 
   return (
-    <section className="py-16">
+    <section className="py-16 bg-light">
       <div className="container mx-auto px-6 text-center lg:text-left">
         {/* Title */}
         <h2 className="text-4xl text-center font-bold text-secondary mb-4">
