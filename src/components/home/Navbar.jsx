@@ -1,15 +1,18 @@
 import { GiBookAura } from "react-icons/gi";
 import { IoMdKey } from "react-icons/io";
-import {Link, NavLink } from "react-router-dom";
+import {Link, NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+    const location = useLocation();
+    const isHome = location.pathname === "/";
+
     const links = <>
         <li className="mr-2 font-bold text-gray-500"><NavLink to="/">Home</NavLink></li>
         <li className="mr-2 font-bold text-gray-500"><NavLink to="/about">About Us</NavLink></li>
     </>
     return (
-        <div className="w-11/12 mx-auto">
-            <div className="navbar">
+        <div className={`${isHome ? "bg-primary/25" : " bg-base-100"}`}>
+            <div className="navbar w-11/12 mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -40,7 +43,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn btn-ghost btn-outline text-secondary bg-white rounded-3xl"><IoMdKey className="text-lg" />Login</a>
+                    <a className="btn btn-ghost btn-outline text-secondary  rounded-3xl"><IoMdKey className="text-lg" />Login</a>
                 </div>
             </div>
         </div>
