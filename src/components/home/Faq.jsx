@@ -47,7 +47,7 @@ const Faq = () => {
     ];
 
     return (
-        <div className="bg-light py-16 mb-10">
+        <div className="bg-light py-16 ">
             <h2 className="text-4xl text-center  font-bold  mb-8">
                 Frequently Asked Questions
             </h2>

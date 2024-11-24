@@ -5,6 +5,8 @@ import Hero from "../components/home/Hero";
 import HowItWorks from "../components/home/HowItWorks";
 import Pricing from "../components/home/Pricing";
 import States from "../components/home/States";
+import SubjectHelp from "../components/home/SubjectHelp";
+import Testimonial from "../components/home/Testimonial";
 
 const HomePage = () => {
     return (
@@ -13,9 +15,11 @@ const HomePage = () => {
                 <Hero/>
                 <DiscoverSection/>
                 <HowItWorks/>
+                <SubjectHelp />
                 <States/>
                 <Pricing/>
                 <Faq/>
+                <Testimonial/>
                 <Foooter/>
             </main>
         </div>

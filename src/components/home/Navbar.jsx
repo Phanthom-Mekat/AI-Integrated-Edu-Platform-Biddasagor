@@ -7,7 +7,7 @@ const Navbar = () => {
     const isHome = location.pathname === "/";
 
     const links = <>
-        <li className="mr-2 font-bold text-gray-500"><NavLink to="/">Home</NavLink></li>
+        <li className="mr-2 font-bold text-gray-500"><NavLink to="/" className={({isActive}) => isActive ? "bg-secondary/80" : ""}>Home</NavLink></li>
         <li className="mr-2 font-bold text-gray-500"><NavLink to="/about">About Us</NavLink></li>
     </>
     return (
