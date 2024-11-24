@@ -34,10 +34,20 @@ const Faq = () => {
             answer:
                 "Yes, we prioritize safety. Our platform is COPPA-compliant and ensures all data is securely stored and never shared with third parties.",
         },
+        {
+            question: "How can I contact customer support?",
+            answer:
+                "You can reach out to our customer support team at [support email]. We are here to help with any questions or concerns you may have.",
+        },
+        {
+            question: "What payment methods are accepted?",
+            answer:
+                "We accept a wide range of payment methods, including credit cards, debit cards, and PayPal. You can choose the most convenient option for you.",
+        },
     ];
 
     return (
-        <div className="bg-light py-16">
+        <div className="bg-light py-16 mb-10">
             <h2 className="text-4xl text-center  font-bold  mb-8">
                 Frequently Asked Questions
             </h2>

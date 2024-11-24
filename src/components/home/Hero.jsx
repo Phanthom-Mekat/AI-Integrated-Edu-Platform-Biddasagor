@@ -24,7 +24,7 @@ const Hero = () => {
             Welcome to Biddasagor, your one-stop online resource for all
             things related to education, career, and personal development.
           </p>
-          <button className="btn bg-secondary rounded-xl text-bold text-lg">
+          <button className="btn bg-tertiary/80 rounded-xl text-bold text-lg">
             Get Started
           </button>
         </div>

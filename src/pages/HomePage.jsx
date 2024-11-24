@@ -1,5 +1,6 @@
 import DiscoverSection from "../components/home/DiscoverSection";
 import Faq from "../components/home/FAQ";
+import Foooter from "../components/home/Foooter";
 import Hero from "../components/home/Hero";
 import HowItWorks from "../components/home/HowItWorks";
 import Pricing from "../components/home/Pricing";
@@ -15,6 +16,7 @@ const HomePage = () => {
                 <States/>
                 <Pricing/>
                 <Faq/>
+                <Foooter/>
             </main>
         </div>
     );
