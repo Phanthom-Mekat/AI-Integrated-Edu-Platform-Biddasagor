@@ -1,7 +1,9 @@
+
 const Hero = () => {
+
   return (
     <div className="hero bg-primary/25 py-12">
-      <div className="hero-content flex flex-col lg:flex-row-reverse items-center">
+      <div className="hero-content flex flex-col lg:flex-row-reverse items-center" data-aos="fade-up">
         {/* Right Image */}
         <div className="">
         <img src="https://cdn.prod.website-files.com/65d1995bebc2cbfa914e45d5/65d42f061abca6bbbd7cd77b_Hero%20Image%2004.svg" alt="" />
@@ -16,7 +18,7 @@ const Hero = () => {
         </div>
         
         {/* Left Content */}
-        <div className="text-center lg:text-left lg:mr-12">
+        <div className="text-center lg:text-left lg:mr-12"  data-aos="fade-up" >
           <h1 className="text-4xl font-bold text-secondary mb-4">
             Discover Endless Possibilities
           </h1>

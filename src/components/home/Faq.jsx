@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const Faq = () => {
@@ -47,15 +47,29 @@ const Faq = () => {
     ];
 
     return (
-        <div className="bg-light py-16 ">
-            <h2 className="text-4xl text-center  font-bold  mb-8">
+        <div
+            className="bg-light py-16"
+            data-aos="fade-up"
+            data-aos-duration="800"
+        >
+            <h2
+                className="text-4xl text-center font-bold mb-8"
+                data-aos="fade-up"
+                data-aos-delay="200"
+            >
                 Frequently Asked Questions
             </h2>
-            <div className="max-w-4xl mx-auto space-y-4">
+            <div
+                className="max-w-4xl mx-auto space-y-4"
+                data-aos="fade-up"
+                data-aos-delay="400"
+            >
                 {faqData.map((faq, index) => (
                     <div
                         key={index}
                         className="border border-secondary/90 rounded-lg shadow-md overflow-hidden"
+                        data-aos="fade-up"
+                        data-aos-delay={`${500 + index * 100}`}
                     >
                         {/* Question */}
                         <button
@@ -73,7 +87,11 @@ const Faq = () => {
                         </button>
                         {/* Answer */}
                         {activeIndex === index && (
-                            <div className="p-4 bg-primary/10 text-gray-600">
+                            <div
+                                className="p-4 bg-primary/10 text-gray-600"
+                                data-aos="fade-down"
+                                data-aos-duration="500"
+                            >
                                 {faq.answer}
                             </div>
                         )}

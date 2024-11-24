@@ -11,7 +11,7 @@ const Navbar = () => {
         <li className="mr-2 font-bold text-gray-500"><NavLink to="/about">About Us</NavLink></li>
     </>
     return (
-        <div className={`${isHome ? "bg-primary/25" : " bg-base-100"}`}>
+        <div className={`${isHome ? "bg-primary/25" : " bg-base-100"}`} data-aos="fade-down">
             <div className="navbar w-11/12 mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">

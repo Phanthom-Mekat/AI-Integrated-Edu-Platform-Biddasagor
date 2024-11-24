@@ -32,8 +32,8 @@ const DiscoverSection = () => {
   });
 
   return (
-    <section className="py-16 bg-light">
-      <div className="container mx-auto px-6 text-center lg:text-left">
+    <section className="py-16 bg-light" data-aos="fade-up">
+      <div className="container mx-auto px-6 text-center lg:text-left" data-aos="fade-up">
         {/* Title */}
         <h2 className="text-4xl text-center font-bold text-secondary mb-4">
           Discover Biddasagor
@@ -44,7 +44,7 @@ const DiscoverSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Slider */}
-          <div className="relative bg-primary/10 " {...handlers}>
+          <div className="relative bg-primary/10 " {...handlers} data-aos="fade-right">
             <div className="w-full relative overflow-hidden rounded-lg">
               <img
                 src={sliderImages[currentSlide]}
@@ -55,8 +55,8 @@ const DiscoverSection = () => {
           </div>
 
           {/* Features */}
-          <div className="space-y-6">
-            <div className="flex items-start">
+          <div className="space-y-6" data-aos="fade">
+            <div className="flex items-start" data-aos="fade-up">
               <div className="w-12 h-12 flex items-center justify-center bg-primary text-white rounded-lg mr-4">
                 <FaRobot size={20} />
               </div>
@@ -68,7 +68,7 @@ const DiscoverSection = () => {
               </div>
             </div>
 
-            <div className="flex items-start">
+            <div className="flex items-start" data-aos="fade-up">
               <div className="w-12 h-12 flex items-center justify-center bg-primary text-white rounded-lg mr-4">
                 <FaBookOpen size={20} />
               </div>
@@ -80,7 +80,7 @@ const DiscoverSection = () => {
               </div>
             </div>
 
-            <div className="flex items-start">
+            <div className="flex items-start" data-aos="fade-up">
               <div className="w-12 h-12 flex items-center justify-center bg-primary text-white rounded-lg mr-4">
                 <FaUsers size={20} />
               </div>
@@ -94,7 +94,7 @@ const DiscoverSection = () => {
               </div>
             </div>
 
-            <div className="flex items-start">
+            <div className="flex items-start" data-aos="fade-up">
               <div className="w-12 h-12 flex items-center justify-center bg-primary text-white rounded-lg mr-4">
                 <FaClock size={20} />
               </div>
