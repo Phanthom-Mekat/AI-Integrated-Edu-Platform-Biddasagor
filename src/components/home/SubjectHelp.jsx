@@ -28,7 +28,6 @@ const SubjectHelp = () => {
         data-aos="fade-up"
         data-aos-offset="300"
         data-aos-easing="ease-in-sine"
-        data-aos-anchor-placement="center-bottom"
     >
         <div
             className="text-center mb-12"

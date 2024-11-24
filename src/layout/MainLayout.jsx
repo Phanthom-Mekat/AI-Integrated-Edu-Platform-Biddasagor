@@ -5,7 +5,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 const MainLayout = () => {
     useEffect(() => {
-        AOS.init({ duration: 2000, easing: "ease-in-out" });
+        AOS.init({ duration: 1700, easing: "ease-in-out" });
       }, []);
     return (
         <div className="">

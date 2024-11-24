@@ -2,7 +2,7 @@
 const Hero = () => {
 
   return (
-    <div className="hero bg-primary/25 py-12">
+    <div className="hero bg-primary/25 py-12 overflow-hidden" >
       <div className="hero-content flex flex-col lg:flex-row-reverse items-center" data-aos="fade-up">
         {/* Right Image */}
         <div className="">

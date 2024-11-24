@@ -4,7 +4,7 @@ import CountUp from "react-countup";
 const States = () => {
     return (
         <div
-            className="bg-tertiary/25 pt-80 md:pt-40 pb-16"
+            className="bg-tertiary/25 pt-80 md:pt-40 pb-16 overflow-hidden"
             style={{
                 clipPath:
                     "polygon(0 15%, 10% 10%, 20% 20%, 30% 15%, 40% 20%, 50% 10%, 60% 20%, 70% 15%, 80% 10%, 90% 20%, 100% 10%, 100% 100%, 0 100%)",

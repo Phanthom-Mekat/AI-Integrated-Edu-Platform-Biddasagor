@@ -55,7 +55,7 @@ const DiscoverSection = () => {
           </div>
 
           {/* Features */}
-          <div className="space-y-6" data-aos="fade">
+          <div className="space-y-6" data-aos="fade" >
             <div className="flex items-start" data-aos="fade-up">
               <div className="w-12 h-12 flex items-center justify-center bg-primary text-white rounded-lg mr-4">
                 <FaRobot size={20} />

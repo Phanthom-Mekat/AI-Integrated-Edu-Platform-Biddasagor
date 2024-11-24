@@ -3,7 +3,7 @@ import { MdOutlineQuiz } from "react-icons/md";
 
 const HowItWorks = () => {
     return (
-        <div className="py-16 bg-light" data-aos="fade-up" 
+        <div className="py-16 bg-light overflow-hidden" data-aos="fade-up" 
         data-aos-offset="300"
         data-aos-easing="ease-in-sine"
         >
