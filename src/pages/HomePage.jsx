@@ -1,3 +1,4 @@
+import DiscoverSection from "../components/home/DiscoverSection";
 import Hero from "../components/home/Hero";
 
 const HomePage = () => {
@@ -5,7 +6,7 @@ const HomePage = () => {
         <div>
             <main>
                 <Hero/>
-                
+                <DiscoverSection/>
             </main>
         </div>
     );

@@ -43,7 +43,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn btn-ghost btn-outline text-secondary  rounded-3xl"><IoMdKey className="text-lg" />Login</a>
+                    <a className="btn btn-ghost btn-outline text-secondary font-extrabold text-lg rounded-3xl"><IoMdKey className="text-xl" />Login</a>
                 </div>
             </div>
         </div>
