@@ -11,8 +11,8 @@ const Navbar = () => {
         <li className="mr-2 font-bold text-gray-500"><NavLink to="/about">About Us</NavLink></li>
     </>
     return (
-        <div className={`${isHome ? "bg-primary/25" : " bg-base-100"}`} data-aos="fade-down">
-            <div className="navbar w-11/12 mx-auto">
+        <div className={`${isHome ? "bg-primary/25" : " bg-base-100"}`}>
+            <div className="navbar  w-11/12 mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -43,7 +43,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                <Link to='/dashboard' className="btn btn-ghost btn-outline text-secondary font-extrabold text-lg rounded-3xl"><IoMdKey className="text-xl" />Login </Link>
+                <Link to='/login' className="btn btn-ghost btn-outline text-secondary font-extrabold text-lg rounded-3xl"><IoMdKey className="text-xl" />Login </Link>
                 </div>
             </div>
         </div>

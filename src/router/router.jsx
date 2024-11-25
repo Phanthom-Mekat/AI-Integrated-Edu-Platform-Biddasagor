@@ -10,6 +10,9 @@ import Addition from "../pages/Addition";
 import Quiz from "../pages/Quiz";
 import Chatbot from "../pages/Chatbot";
 import Subtraction from "../pages/Subtraction";
+import AuthLayout from "../layout/AuthLayout";
+import Login from "../components/auth/Login";
+import Register from "../components/auth/Register";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +23,20 @@ const router = createBrowserRouter([
                 path: "/",
                 element: <HomePage />,
             },
+        ],
+    },
+    {
+        path: "/login",
+        element: <AuthLayout />,
+        children: [
+            {
+                path: "/login",
+                element:<Login/>,
+            },
+            {
+                path: "register",
+                element: <Register />,
+            }
         ],
     },
     {

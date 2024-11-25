@@ -28,7 +28,7 @@ const HowItWorks = () => {
                 data-aos-delay="300"
             >
                 {/* Step 1 */}
-                <li data-aos="fade-right" data-aos-anchor-placement="center-bottom">
+                <li data-aos="fade-right" data-aos-anchor-placement="bottom-bottom">
                     <div className="timeline-middle p-3 bg-primary/60 rounded-full">
                         <FaUpload className="h-5 w-5" />
                     </div>
@@ -43,7 +43,7 @@ const HowItWorks = () => {
                 </li>
 
                 {/* Step 2 */}
-                <li data-aos="fade-left" data-aos-anchor-placement="center-bottom">
+                <li data-aos="fade-left" data-aos-anchor-placement="bottom-bottom">
                     <hr />
                     <div className="timeline-middle p-3 bg-primary/60 rounded-full">
                         <FaTasks className="h-5 w-5" />
@@ -59,7 +59,7 @@ const HowItWorks = () => {
                 </li>
 
                 {/* Step 3 */}
-                <li data-aos="fade-right" data-aos-anchor-placement="center-bottom">
+                <li data-aos="fade-right" data-aos-anchor-placement="bottom-bottom">
                     <hr />
                     <div className="timeline-middle p-3 bg-primary/60 rounded-full">
                         <MdOutlineQuiz className="h-5 w-5" />
@@ -75,7 +75,7 @@ const HowItWorks = () => {
                 </li>
 
                 {/* Step 4 */}
-                <li data-aos="fade-left" data-aos-anchor-placement="center-bottom">
+                <li data-aos="fade-left" data-aos-anchor-placement="bottom-bottom">
                     <hr />
                     <div className="timeline-middle p-3 bg-primary/60 rounded-full">
                         <FaCheck className="h-5 w-5" />
@@ -91,7 +91,7 @@ const HowItWorks = () => {
                 </li>
 
                 {/* Step 5 */}
-                <li data-aos="fade-right" data-aos-anchor-placement="center-bottom">
+                <li data-aos="fade-right" data-aos-anchor-placement="bottom-bottom">
                     <hr />
                     <div className="timeline-middle p-3 bg-primary/60 rounded-full">
                         <FaChartBar className="h-5 w-5" />
