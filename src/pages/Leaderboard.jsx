@@ -2,6 +2,7 @@ import { FaUser, FaBook, FaMedal } from "react-icons/fa";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 import LeaderboardTable from "../components/Dashboard/LeaderboardTable";
 import FavTopics from "../components/Dashboard/FavTopics";
+import NavBarDashboard from "../components/Dashboard/NavBarDashboard";
 
 const data = [
   { day: "Mon", score: 4 },
@@ -15,7 +16,9 @@ const data = [
 
 function LeaderboardContent() {
   return (
-    <div className="container mx-auto px-4 py-8 lg:px-8">
+    <div>
+        <NavBarDashboard/>
+      <div className="container mx-auto px-4 py-8 lg:px-8">
       {/* Page Title */}
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-12 text-primary">
         Leaderboard & Insights
@@ -150,6 +153,7 @@ function LeaderboardContent() {
         </div>
       </div>
     </div>
+      </div>
   );
 }
 

@@ -8,7 +8,7 @@ export default function Subtraction() {
         <div className="max-w-6xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <button className="p-2 hover:bg-purple-50 rounded-full transition-colors">
+              <button onClick={() => window.history.back()} className="p-2 hover:bg-purple-50 rounded-full transition-colors">
                 <ArrowLeft className="h-5 w-5 text-purple-600" />
               </button>
               <div className="flex items-center gap-2">

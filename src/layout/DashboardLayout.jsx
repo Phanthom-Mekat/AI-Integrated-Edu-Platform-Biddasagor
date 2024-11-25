@@ -6,7 +6,7 @@ const DashboardLayout = () => {
     return (
         <div>
             <div className="">
-            <NavBarDashboard></NavBarDashboard>
+            {/* <NavBarDashboard></NavBarDashboard> */}
             </div>
 
         <div className="md:flex md:min-h-screen">

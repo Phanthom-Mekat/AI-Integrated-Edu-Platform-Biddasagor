@@ -20,7 +20,7 @@ function Addition() {
       <header className="bg-white border-b shadow-sm">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <button className="p-2 hover:bg-slate-100 rounded-lg">
+            <button onClick={() => window.history.back()} className="p-2 hover:bg-slate-100 rounded-lg">
               <ArrowLeft className="h-5 w-5" />
             </button>
             <div className="flex items-center gap-4">
