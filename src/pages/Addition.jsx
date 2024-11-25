@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Bot, User, Send, Brain, Calculator, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+import { MdKeyboardVoice } from "react-icons/md";
+import { AiFillSound } from "react-icons/ai";
 
 function Addition() {
   const [messages] = useState([
-    { isBot: true, message: "Hi! I'm Biddasagor! Let's learn addition together! 🌟" },
-    { isBot: true, message: "Let's start . Pick any two number" },
+    { isBot: true, message: "Hi! I'm Biddasagor! I am glad that you wanted to learn addition. Let's learn addition together! 🌟" },
+    { isBot: true, message: "Let's start . Pick two numbers you like \n \n 1 2 3 4 5 6 7 8 9... " },
     { isBot: false, message: "5 and 3" },
     { isBot: true, message: "Great! Let's solve this step by step:\n1. First, let's start with 5\n2. We need to add 3 to it\n3. We can count: 5... 6, 7, 8\nWhat do you think the answer is?" }
   ]);
@@ -57,6 +58,9 @@ function Addition() {
                   </p>
                   <p className="text-slate-700 mt-1 whitespace-pre-line">{msg.message}</p>
                 </div>
+                <div>
+                {msg.isBot ? <AiFillSound className='text-2xl cursor-pointer'></AiFillSound> :''}
+                </div>
               </div>
             ))}
           </div>
@@ -64,10 +68,11 @@ function Addition() {
           {/* Input Area */}
           <div className="border-t p-4">
             <form  className="flex gap-2">
-              <input
+             <div className='flex gap-2 items-center w-full'>
+             <input
                 name="message"
                 placeholder="Type your answer here..."
-                className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600  "
               />
               <Link to='/dashboard/learn/Math/quiz'>
               <button 
@@ -76,6 +81,10 @@ function Addition() {
               >
                 <Send className="h-4 w-4" />
               </button></Link>
+              <div className='p-2 rounded-lg hover:bg-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 cursor-pointer'>
+                <MdKeyboardVoice className='text-2xl'></MdKeyboardVoice>
+              </div>
+             </div>
             </form>
           </div>
         </div>

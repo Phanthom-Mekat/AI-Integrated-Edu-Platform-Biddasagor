@@ -87,9 +87,7 @@ function Chatbot() {
         {/* Learning Tools */}
         <div className="mt-4 flex gap-2">
          
-          <button className="px-4 py-2 text-sm bg-white border rounded-lg hover:bg-gray-50 transition-colors">
-            Visual Guide
-          </button>
+         
         </div>
       </main>
     </div>

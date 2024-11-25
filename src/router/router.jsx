@@ -9,6 +9,7 @@ import MathPage from "../pages/MathPage";
 import Addition from "../pages/Addition";
 import Quiz from "../pages/Quiz";
 import Chatbot from "../pages/Chatbot";
+import Subtraction from "../pages/Subtraction";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/learn/Math/addition',
                 element: <Addition></Addition>
+            },
+            {
+                path: '/dashboard/learn/Math/subtraction',
+                element: <Subtraction></Subtraction>
             },
             {
                 path: '/dashboard/learn/Math/quiz',

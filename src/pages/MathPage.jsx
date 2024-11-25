@@ -25,7 +25,7 @@ const MathPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Link to='/dashboard/learn/Math/addition'><MathCard title="Addition" color="bg-green-500" icon={<FaPlus className="w-8 h-8" />} image={'/public/addition.png'} /></Link>
-            <MathCard title="Subtraction" color="bg-yellow-500" icon={<FaMinus className="w-8 h-8" />} image={'/public/subtr.png'} />
+            <Link to='subtraction'><MathCard title="Subtraction" color="bg-yellow-500" icon={<FaMinus className="w-8 h-8" />} image={'/public/subtr.png'} /></Link>
             <MathCard title="Multiplication" color="bg-pink-500" icon={<FaTimes className="w-8 h-8" />} image={'/public/multiplication.png'} />
           </div>
         </div>

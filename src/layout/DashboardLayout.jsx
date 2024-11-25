@@ -8,16 +8,14 @@ const DashboardLayout = () => {
             <div className="">
             <NavBarDashboard></NavBarDashboard>
             </div>
-        <div className="md:flex min-h-screen">
 
-           
-           
+        <div className="md:flex md:min-h-screen">
             <div className="w-80 md:h-screen md:sticky md:top-0 ">
                 <Sidebar />
             </div>
 
             
-            <div className="flex-grow p-4">
+            <div className="flex-grow ">
                 <Outlet />
             </div>
         </div>
