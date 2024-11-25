@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { FaTrophy, FaMedal, FaAward, FaUser, FaChartLine, FaBolt, FaFire, FaBook } from 'react-icons/fa';
 
 const leaderboardData = [

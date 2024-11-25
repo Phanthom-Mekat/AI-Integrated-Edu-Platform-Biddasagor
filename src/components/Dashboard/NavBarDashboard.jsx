@@ -7,7 +7,7 @@ const NavBarDashboard = () => {
             <h1 className="text-3xl"><IoIosNotifications></IoIosNotifications></h1>
 
             <div>
-                <img src="/public/dp-removebg-preview.png" alt="" className="rounded-full w-[50px] h-[50px]"/>
+                <img src="/dp-removebg-preview.png" alt="" className="rounded-full w-[50px] h-[50px]"/>
             </div>
 
             <div>

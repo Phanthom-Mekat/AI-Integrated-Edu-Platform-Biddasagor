@@ -29,7 +29,7 @@ function LeaderboardContent() {
         <div className="bg-white rounded-lg shadow-lg p-6">
           <div className="flex flex-col items-center mb-6">
             <img
-              src="/public/dp-removebg-preview.png"
+              src="/dp-removebg-preview.png"
               alt="User Avatar"
               className="rounded-full w-32 h-32 border-4 border-primary"
             />

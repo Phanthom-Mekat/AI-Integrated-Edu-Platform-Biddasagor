@@ -14,7 +14,7 @@ const Games = () => {
                 {/* Solve Puzzle */}
                 <div className="bg-yellow-100 p-6 rounded-xl shadow-md flex flex-col items-center text-center hover:scale-105 transition-transform duration-300">
                     <img
-                        src="/public/puzzle.png"
+                        src="/puzzle.png"
                         alt="Solve Puzzle"
                         className="w-1/2 mb-4"
                     />
@@ -30,7 +30,7 @@ const Games = () => {
                 {/* Take Quiz */}
                 <div className="bg-green-100 p-6 rounded-xl shadow-md flex flex-col items-center text-center hover:scale-105 transition-transform duration-300">
                     <img
-                        src="/public/quiz1.png"
+                        src="/quiz1.png"
                         alt="Take Quiz"
                         className="w-1/2 mb-4"
                     />
