@@ -25,7 +25,7 @@ const FavTopics = () => {
   };
 
   return (
-    <div className="w-full mx-auto bg-gradient-to-br from-indigo-600 to-purple-500 p-6 rounded-lg shadow-lg">
+    <div className="w-full mx-auto bg-gradient-to-br from-indigo-400 to-primary p-6 rounded-lg shadow-lg">
       <h2 className="text-3xl font-bold text-white mb-6 flex items-center">
         <FaStar className="mr-2 text-yellow-400" />
         Favorite Topics

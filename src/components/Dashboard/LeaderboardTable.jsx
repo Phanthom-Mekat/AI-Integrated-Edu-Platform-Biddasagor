@@ -1,5 +1,4 @@
-
-import { FaTrophy, FaMedal, FaAward, FaUser, FaChartLine, FaBolt, FaFire, FaBook } from 'react-icons/fa';
+import { FaTrophy, FaMedal,  FaUser, FaChartLine, FaBolt, FaFire, FaBook } from 'react-icons/fa';
 
 const leaderboardData = [
   { id: 1, name: "John Doe", score: 1250, change: 2, totalXP: 15000, totalWins: 47, lessonsCompleted: 120 },
@@ -11,46 +10,63 @@ const leaderboardData = [
 
 const LeaderboardTable = () => {
   return (
-    <div className="w-full mx-auto bg-gradient-to-br from-purple-600 to-blue-500 p-6 rounded-lg shadow-lg">
-      <h2 className="text-3xl font-bold text-white mb-6 flex items-center">
-        <FaTrophy className="mr-2 text-yellow-400" />
-        Leaderboard
-      </h2>
-      <div className="space-y-4">
+    <div className="w-full mx-auto bg-gradient-to-br from-primary to-blue-600 p-8 rounded-xl shadow-lg">
+      {/* Leaderboard Header */}
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-4xl font-bold text-white flex items-center">
+          <FaTrophy className="mr-3 text-yellow-400" />
+          Leaderboard
+        </h2>
+        <p className="text-sm text-blue-200">Track the top learners at Biddasagor!</p>
+      </div>
+
+      {/* Leaderboard List */}
+      <div className="space-y-6">
         {leaderboardData.map((user, index) => (
-          <div 
-            key={user.id} 
-            className="flex flex-wrap items-center bg-white bg-opacity-20 p-4 rounded-lg  transition-all hover:bg-opacity-30 "
+          <div
+            key={user.id}
+            className="flex items-center bg-white bg-opacity-10 p-6 rounded-lg transform transition-transform duration-300 hover:scale-105 hover:bg-opacity-20 shadow-md"
           >
-            <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 text-white font-bold text-xl">
-              {index === 0 && <FaTrophy className="text-2xl" />}
-              {index === 1 && <FaMedal className="text-2xl text-gray-300" />}
-              {index === 2 && <FaMedal className="text-2xl text-yellow-700" />}
-              {index > 2 && index + 1}
+            {/* Rank Badge */}
+            <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-2xl font-bold">
+              {index === 0 && <FaTrophy />}
+              {index === 1 && <FaMedal className="text-gray-300" />}
+              {index === 2 && <FaMedal className="text-yellow-700" />}
+              {index > 2 && <span>{index + 1}</span>}
             </div>
+
+            {/* User Info */}
             <div className="ml-4 flex-grow">
-              <h3 className="text-lg font-semibold text-white">{user.name}</h3>
+              <h3 className="text-xl font-semibold text-white">{user.name}</h3>
               <p className="text-sm text-blue-200">Score: {user.score}</p>
             </div>
-            <div className="flex items-center mr-4">
-              <FaUser className="text-white mr-2" />
-              <span className="text-white font-medium">{user.score}</span>
-            </div>
-            <div className={`flex items-center mr-4 ${user.change > 0 ? 'text-green-400' : user.change < 0 ? 'text-red-400' : 'text-gray-400'}`}>
-              <FaChartLine className="mr-1" />
-              <span>{user.change > 0 ? '+' : ''}{user.change}</span>
-            </div>
-            <div className="flex items-center mr-4">
-              <FaBolt className="text-yellow-300 mr-1" />
-              <span className="text-white">XP: {user.totalXP}</span>
-            </div>
-            <div className="flex items-center mr-4">
-              <FaFire className="text-red-400 mr-1" />
-              <span className="text-white">Wins: {user.totalWins}</span>
-            </div>
-            <div className="flex items-center">
-              <FaBook className="text-green-300 mr-1" />
-              <span className="text-white">Lessons: {user.lessonsCompleted}</span>
+
+            {/* Stats */}
+            <div className="flex items-center space-x-6">
+              <div className="flex items-center text-green-300">
+                <FaUser className="mr-2" />
+                <span>{user.score}</span>
+              </div>
+              <div
+                className={`flex items-center ${
+                  user.change > 0 ? "text-green-400" : user.change < 0 ? "text-red-400" : "text-gray-400"
+                }`}
+              >
+                <FaChartLine className="mr-2" />
+                <span>{user.change > 0 ? "+" : ""}{user.change}</span>
+              </div>
+              <div className="flex items-center text-yellow-300">
+                <FaBolt className="mr-2" />
+                <span>{user.totalXP} XP</span>
+              </div>
+              <div className="flex items-center text-red-400">
+                <FaFire className="mr-2" />
+                <span>{user.totalWins} Wins</span>
+              </div>
+              <div className="flex items-center text-green-300">
+                <FaBook className="mr-2" />
+                <span>{user.lessonsCompleted} Lessons</span>
+              </div>
             </div>
           </div>
         ))}
@@ -60,4 +76,3 @@ const LeaderboardTable = () => {
 };
 
 export default LeaderboardTable;
-
