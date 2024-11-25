@@ -1,5 +1,5 @@
 import DiscoverSection from "../components/home/DiscoverSection";
-import Faq from "../components/home/FAQ";
+import Faq from "../components/home/Faq";
 import Foooter from "../components/home/Foooter";
 import Hero from "../components/home/Hero";
 import HowItWorks from "../components/home/HowItWorks";
