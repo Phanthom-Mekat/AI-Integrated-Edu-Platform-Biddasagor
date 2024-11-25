@@ -22,9 +22,9 @@ const Sidebar = () => {
                         <CiMenuBurger className="text-2xl font-bold"></CiMenuBurger>
                     </label>
                 </div>
-                <div className="drawer-side">
+                <div className="drawer-side z-50">
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu bg-secondary/40 text-base-content min-h-full w-80 p-4 ">
+                    <ul className="menu bg-light md:bg-secondary/40 text-base-content min-h-full w-80 p-4 z-[100] ">
                         {/* Sidebar content here */}
                         <Link to='/dashboard'>
                             <h1 className="text-4xl font-bold mb-10 text-center">Dashboard</h1>

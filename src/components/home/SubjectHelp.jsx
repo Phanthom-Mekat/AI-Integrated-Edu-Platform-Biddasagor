@@ -33,7 +33,7 @@ const SubjectHelp = () => {
             className="text-center mb-12"
             data-aos="fade-up"
             data-aos-delay="200"
-            data-aos-anchor-placement="top-center"
+            data-aos-anchor-placement="bottom-center"
         >
             <h2 className="text-3xl font-bold text-secondary">
                 Get Homework Help with Any Subject, Any Question

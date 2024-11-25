@@ -4,7 +4,7 @@ const Games = () => {
     return (
         <div className="bg-blue-50 min-h-screen">
             {/* Page Header */}
-            <div className="bg-gradient-to-br from-purple-600 to-blue-500 text-white p-5">
+            <div className="bg-light  p-5">
                 <h1 className="text-center text-4xl font-bold">Fun & Learn</h1>
                 <p className="text-center text-lg mt-2">Explore games to sharpen your math skills while having fun!</p>
             </div>
@@ -12,7 +12,7 @@ const Games = () => {
             {/* Game Options Section */}
             <div className="mt-12 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 px-6">
                 {/* Solve Puzzle */}
-                <div className="bg-yellow-100 p-6 rounded-xl shadow-md flex flex-col items-center text-center hover:scale-105 transition-transform duration-300">
+                <div className="bg-tertiary/20 p-6 rounded-xl shadow-md flex flex-col items-center text-center hover:scale-105 transition-transform duration-300">
                     <img
                         src="/puzzle.png"
                         alt="Solve Puzzle"

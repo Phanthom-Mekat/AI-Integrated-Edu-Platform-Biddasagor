@@ -72,7 +72,7 @@ const Register = () => {
                 {/* Right Section - Illustration */}
                 <div className="md:w-1/2 bg-gray-100 flex items-center justify-center">
                     <img
-                        src="../../../public/login.png"
+                        src="/login.png"
                         alt="Educational illustration"
                         className="w-full h-full object-cover"
                     />

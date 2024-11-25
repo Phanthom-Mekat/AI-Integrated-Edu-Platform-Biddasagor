@@ -11,7 +11,7 @@ import Testimonial from "../components/home/Testimonial";
 const HomePage = () => {
     return (
         <div>
-            <main>
+            <main className="overflow">
                 <Hero/>
                 <DiscoverSection/>
                 <HowItWorks/>

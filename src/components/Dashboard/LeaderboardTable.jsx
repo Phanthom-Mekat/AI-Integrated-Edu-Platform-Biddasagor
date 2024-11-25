@@ -1,4 +1,4 @@
-import { FaTrophy, FaMedal,  FaUser, FaChartLine, FaBolt, FaFire, FaBook } from 'react-icons/fa';
+import { FaTrophy, FaMedal, FaUser, FaChartLine, FaBolt, FaFire, FaBook } from 'react-icons/fa';
 
 const leaderboardData = [
   { id: 1, name: "John Doe", score: 1250, change: 2, totalXP: 15000, totalWins: 47, lessonsCompleted: 120 },
@@ -10,25 +10,25 @@ const leaderboardData = [
 
 const LeaderboardTable = () => {
   return (
-    <div className="w-full mx-auto bg-gradient-to-br from-primary to-blue-600 p-8 rounded-xl shadow-lg">
+    <div className="w-full mx-auto bg-gradient-to-br from-primary to-blue-600 p-4 sm:p-8 rounded-xl shadow-lg">
       {/* Leaderboard Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-4xl font-bold text-white flex items-center">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6">
+        <h2 className="text-2xl sm:text-4xl font-bold text-white flex items-center mb-4 sm:mb-0">
           <FaTrophy className="mr-3 text-yellow-400" />
           Leaderboard
         </h2>
-        <p className="text-sm text-blue-200">Track the top learners at Biddasagor!</p>
+        <p className="text-sm sm:text-base text-blue-200">Track the top learners at Biddasagor!</p>
       </div>
 
       {/* Leaderboard List */}
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {leaderboardData.map((user, index) => (
           <div
             key={user.id}
-            className="flex items-center bg-white bg-opacity-10 p-6 rounded-lg transform transition-transform duration-300 hover:scale-105 hover:bg-opacity-20 shadow-md"
+            className="flex flex-col sm:flex-row items-center sm:items-start bg-white bg-opacity-10 p-4 sm:p-6 rounded-lg transform transition-transform duration-300 hover:scale-105 hover:bg-opacity-20 shadow-md"
           >
             {/* Rank Badge */}
-            <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-2xl font-bold">
+            <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-lg sm:text-2xl font-bold">
               {index === 0 && <FaTrophy />}
               {index === 1 && <FaMedal className="text-gray-300" />}
               {index === 2 && <FaMedal className="text-yellow-700" />}
@@ -36,34 +36,34 @@ const LeaderboardTable = () => {
             </div>
 
             {/* User Info */}
-            <div className="ml-4 flex-grow">
-              <h3 className="text-xl font-semibold text-white">{user.name}</h3>
+            <div className="ml-0 sm:ml-4 mt-4 sm:mt-0 flex-grow text-center sm:text-left">
+              <h3 className="text-base sm:text-xl font-semibold text-white">{user.name}</h3>
               <p className="text-sm text-blue-200">Score: {user.score}</p>
             </div>
 
             {/* Stats */}
-            <div className="flex items-center space-x-6">
-              <div className="flex items-center text-green-300">
+            <div className="flex flex-wrap sm:flex-nowrap justify-center sm:justify-start sm:items-center space-x-6 mt-4 sm:mt-0">
+              <div className="flex items-center text-green-300 text-sm sm:text-base">
                 <FaUser className="mr-2" />
                 <span>{user.score}</span>
               </div>
               <div
-                className={`flex items-center ${
+                className={`flex items-center text-sm sm:text-base ${
                   user.change > 0 ? "text-green-400" : user.change < 0 ? "text-red-400" : "text-gray-400"
                 }`}
               >
                 <FaChartLine className="mr-2" />
                 <span>{user.change > 0 ? "+" : ""}{user.change}</span>
               </div>
-              <div className="flex items-center text-yellow-300">
+              <div className="flex items-center text-yellow-300 text-sm sm:text-base">
                 <FaBolt className="mr-2" />
                 <span>{user.totalXP} XP</span>
               </div>
-              <div className="flex items-center text-red-400">
+              <div className="flex items-center text-red-400 text-sm sm:text-base">
                 <FaFire className="mr-2" />
                 <span>{user.totalWins} Wins</span>
               </div>
-              <div className="flex items-center text-green-300">
+              <div className="flex items-center text-green-300 text-sm sm:text-base">
                 <FaBook className="mr-2" />
                 <span>{user.lessonsCompleted} Lessons</span>
               </div>

@@ -1,6 +1,6 @@
 const Pricing = () => {
     return (
-        <div className="bg-light py-16">
+        <div className="bg-light py-16 overflow-hidden">
             <div className="w-11/12 mx-auto">
                 <h2
                     className="text-4xl text-center font-bold text-secondary mb-6"
