@@ -17,7 +17,9 @@ const data = [
 function LeaderboardContent() {
   return (
     <div>
+        <div className="relative -top-10 lg:top-0 ">
         <NavBarDashboard/>
+        </div>
       <div className="container mx-auto px-4 py-8 lg:px-8">
       {/* Page Title */}
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-12 text-primary">
@@ -25,7 +27,7 @@ function LeaderboardContent() {
       </h1>
 
       {/* Leaderboard Section */}
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-12">
+      <div className="bg-white rounded-lg  overflow-hidden mb-12">
         <h2 className="text-2xl md:text-3xl font-semibold text-center py-6 text-primary">
           Top Achievers
         </h2>

@@ -6,7 +6,9 @@ import NavBarDashboard from '../components/Dashboard/NavBarDashboard'
 const MathPage = () => {
   return (
     <section>
-      <NavBarDashboard />
+      <div className="relative -top-10 lg:top-0 ">
+        <NavBarDashboard/>
+        </div>
       <div className="min-h-screen  p-8">
         <div className="w-full mx-auto">
           <div className="flex flex-col gap-6">

@@ -16,7 +16,7 @@ const Sidebar = () => {
         <div className="">
             <div className="drawer  lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col items-center justify-center relative -top-12 -left-32">
+                <div className="drawer-content flex flex-col items-center justify-center relative top-2 -left-24 z-50">
                     {/* Page content here */}
                     <label htmlFor="my-drawer-2" className="btn  drawer-button lg:hidden ">
                         <CiMenuBurger className="text-2xl font-bold"></CiMenuBurger>

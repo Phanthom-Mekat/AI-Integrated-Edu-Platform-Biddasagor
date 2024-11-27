@@ -4,7 +4,9 @@ import NavBarDashboard from "../components/Dashboard/NavBarDashboard";
 const Games = () => {
     return (
         <section>
-            <NavBarDashboard/>
+            <div className="relative -top-10 lg:top-0 ">
+        <NavBarDashboard/>
+        </div>
             <div className="bg-blue-50 min-h-screen">
                 {/* Page Header */}
                 <div className="bg-light  p-5">

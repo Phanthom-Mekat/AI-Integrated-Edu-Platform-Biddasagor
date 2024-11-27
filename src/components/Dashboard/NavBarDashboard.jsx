@@ -1,7 +1,7 @@
 import { IoIosNotifications } from "react-icons/io";
 const NavBarDashboard = () => {
     return (
-        <div className="w-full bg-secondary/40">
+        <div className="w-full lg:bg-secondary/40">
             <div className="flex justify-end mr-10 items-center gap-4">
 
             <h1 className="text-3xl"><IoIosNotifications></IoIosNotifications></h1>
