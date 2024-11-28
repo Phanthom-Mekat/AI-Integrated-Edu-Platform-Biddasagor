@@ -27,7 +27,7 @@ function LeaderboardContent() {
       </h1>
 
       {/* Leaderboard Section */}
-      <div className="bg-white rounded-lg  overflow-hidden mb-12">
+      <div className="bg-white rounded-lg  overflow-hidden mb-12 ">
         <h2 className="text-2xl md:text-3xl font-semibold text-center py-6 text-primary">
           Top Achievers
         </h2>

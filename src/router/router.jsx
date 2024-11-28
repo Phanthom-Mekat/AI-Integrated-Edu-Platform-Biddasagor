@@ -13,6 +13,7 @@ import Subtraction from "../pages/Subtraction";
 import AuthLayout from "../layout/AuthLayout";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
+import PlayQuiz from "../components/Dashboard/game/Puzzle";
 
 const router = createBrowserRouter([
     {
@@ -49,7 +50,12 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/games',
-                element: <Games></Games>
+                element: <Games></Games>,
+            
+            },
+            {
+                path: '/dashboard/playquiz',
+                element: <PlayQuiz></PlayQuiz>,
             },
             {
                 path: '/dashboard/learn/Math',

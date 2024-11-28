@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import NavBarDashboard from "../components/Dashboard/NavBarDashboard";
 
 
@@ -27,9 +28,9 @@ const Games = () => {
                         <p className="text-gray-700 mt-2">
                             Enhance your logical thinking by solving fun puzzles!
                         </p>
-                        <button className="btn btn-outline   mt-4 px-4 py-2 text-yellow-500  rounded-md ">
+                        <Link  className="btn btn-outline   mt-4 px-4 py-2 text-yellow-500  rounded-md ">
                             Start Now
-                        </button>
+                        </Link>
                     </div>
 
                     {/* Take Quiz */}
@@ -43,9 +44,9 @@ const Games = () => {
                         <p className="text-gray-700 mt-2">
                             Test your math knowledge with exciting quizzes!
                         </p>
-                        <button className="mt-4 px-4 btn btn-outline text-green-500  rounded-md hover:bg-green-600">
+                        <Link to="/dashboard/playquiz" className="mt-4 px-4 btn btn-outline text-green-500  rounded-md hover:bg-green-600">
                             Start Quiz
-                        </button>
+                        </Link>
                     </div>
                 </div>
 
