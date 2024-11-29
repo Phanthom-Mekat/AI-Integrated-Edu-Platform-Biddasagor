@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 import { FaPlus, FaMinus, FaTimes, FaBook } from 'react-icons/fa'
 import { Link } from 'react-router-dom'

@@ -5,8 +5,8 @@ import DashboardLayout from "../layout/DashboardLayout";
 import Leaderboard from "../pages/Leaderboard";
 import Games from "../pages/Games";
 import Error from "../pages/Error";
-// import MathPage from "../pages/MathPage";
-import Addition from "../pages/Addition";
+import MathPage from "../pages/MathPage";
+// import Addition from "../pages/Addition";
 import Quiz from "../pages/Quiz";
 import Chatbot from "../pages/Chatbot";
 import Subtraction from "../pages/Subtraction";
@@ -14,7 +14,7 @@ import AuthLayout from "../layout/AuthLayout";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
 import PlayQuiz from "../components/Dashboard/game/Puzzle";
-import LearnMath from "../components/Dashboard/Math/LearnMath";
+import LearnAdditions from "../components/Dashboard/Math/LearnAdditions";
 
 const router = createBrowserRouter([
     {
@@ -60,12 +60,12 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/learn/Math',
-                element: <LearnMath></LearnMath>,
+                element: <MathPage></MathPage> ,
                 
             },
             {
                 path: '/dashboard/learn/Math/addition',
-                element: <Addition></Addition>
+                element: <LearnAdditions></LearnAdditions>
             },
             {
                 path: '/dashboard/learn/Math/subtraction',
