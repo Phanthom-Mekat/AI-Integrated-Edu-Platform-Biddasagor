@@ -6,7 +6,7 @@ import Leaderboard from "../pages/Leaderboard";
 import Games from "../pages/Games";
 import Error from "../pages/Error";
 import MathPage from "../pages/MathPage";
-import Addition from "../pages/Addition";
+// import Addition from "../pages/Addition";
 import Quiz from "../pages/Quiz";
 import Chatbot from "../pages/Chatbot";
 import Subtraction from "../pages/Subtraction";
@@ -14,6 +14,7 @@ import AuthLayout from "../layout/AuthLayout";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
 import PlayQuiz from "../components/Dashboard/game/Puzzle";
+import LearnAdditions from "../components/Dashboard/Math/LearnAdditions";
 import Test from "../components/Dashboard/Addition/DragApples";
 import DragMango from "../components/Subtraction/DragMango";
 
@@ -61,12 +62,12 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/learn/Math',
-                element: <MathPage></MathPage>,
+                element: <MathPage></MathPage> ,
                 
             },
             {
                 path: '/dashboard/learn/Math/addition',
-                element: <Addition></Addition>
+                element: <LearnAdditions></LearnAdditions>
             },
             {
                 path: '/dashboard/learn/Math/subtraction',
