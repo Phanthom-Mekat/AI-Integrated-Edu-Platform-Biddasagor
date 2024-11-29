@@ -3,6 +3,7 @@ import { Bot, User, Send, Brain, Calculator, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { MdKeyboardVoice } from "react-icons/md";
 import { AiFillSound } from "react-icons/ai";
+import DragApples from '../components/Dashboard/Addition/DragApples';
 
 function Addition() {
   const [messages] = useState([
@@ -63,6 +64,10 @@ function Addition() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className='flex justify-center'>
+            <DragApples></DragApples>
           </div>
 
           {/* Input Area */}

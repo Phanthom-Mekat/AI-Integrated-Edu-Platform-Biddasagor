@@ -1,8 +1,9 @@
 import { ArrowLeft, Brain, Trophy, Bot, HelpCircle, ArrowRight, Send } from 'lucide-react'
+import DragMango from '../components/Subtraction/DragMango'
 
 export default function Subtraction() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 ">
       {/* Header */}
       <header className="bg-white border-b shadow-sm sticky top-0 z-50 hidden lg:block">
         <div className="max-w-6xl mx-auto px-4 py-3">
@@ -42,7 +43,7 @@ export default function Subtraction() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 py-8">
+      <main className="max-w-6xl mx-auto px-4 py-8">
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
           {/* Chat Messages */}
           <div className="h-[400px] overflow-y-auto p-4 space-y-4">
@@ -67,7 +68,7 @@ export default function Subtraction() {
           </div>
 
           {/* Visual Aid */}
-          <div className="px-4 py-6 border-t border-b bg-gray-50">
+          {/* <div className="px-4 py-6 border-t border-b bg-gray-50">
             <div className="flex items-center justify-center gap-8">
               <div className="flex flex-wrap gap-2 w-32">
                 {[...Array(5)].map((_, i) => (
@@ -92,6 +93,9 @@ export default function Subtraction() {
               </div>
             </div>
            
+          </div> */}
+          <div className='py-5'>
+            <DragMango></DragMango>
           </div>
 
           {/* Input Area */}

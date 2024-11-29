@@ -14,6 +14,8 @@ import AuthLayout from "../layout/AuthLayout";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
 import PlayQuiz from "../components/Dashboard/game/Puzzle";
+import Test from "../components/Dashboard/Addition/DragApples";
+import DragMango from "../components/Subtraction/DragMango";
 
 const router = createBrowserRouter([
     {
@@ -77,6 +79,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/learn/Math/chatbot',
                 element: <Chatbot></Chatbot>
+            },
+            {
+                path: '/dashboard/test',
+                element: <DragMango></DragMango>
             },
             
         ],
