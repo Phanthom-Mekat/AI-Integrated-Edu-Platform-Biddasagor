@@ -4,7 +4,7 @@ const DragMango = () => {
   const initialMangoes = Array.from({ length: 5 }, (_, index) => ({
     id: index + 1,
     type: 'image',
-    src: '/public/mango.png',
+    src: '/mango.png',
   }));
 
   const [droppedItems, setDroppedItems] = useState(initialMangoes);
@@ -68,14 +68,14 @@ const DragMango = () => {
           <div
             draggable
             onDragStart={(e) =>
-              handleDragStart(e, { id: 'source1-mango1', type: 'image', src: '/public/mango.png' })
+              handleDragStart(e, { id: 'source1-mango1', type: 'image', src: '/mango.png' })
             }
             className="p-2 mb-2 border cursor-move flex flex-wrap gap-2 rounded-lg"
           >
             {Array.from({ length: 5 }).map((_, index) => (
               <img
                 key={index}
-                src="/public/mango.png"
+                src="/mango.png"
                 alt="Mango"
                 className="w-16 h-16 rounded-full"
               />
@@ -92,14 +92,14 @@ const DragMango = () => {
           <div
             draggable
             onDragStart={(e) =>
-              handleDragStart(e, { id: 'source2-mango1', type: 'image', src: '/public/mango.png' })
+              handleDragStart(e, { id: 'source2-mango1', type: 'image', src: '/mango.png' })
             }
             className="p-2 mb-2 border cursor-move flex flex-wrap gap-2 rounded-lg"
           >
             {Array.from({ length: 2 }).map((_, index) => (
               <img
                 key={index}
-                src="/public/mango.png"
+                src="/mango.png"
                 alt="Mango"
                 className="w-16 h-16 rounded-full"
               />

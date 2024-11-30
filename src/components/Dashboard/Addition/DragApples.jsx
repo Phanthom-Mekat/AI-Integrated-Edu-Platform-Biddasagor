@@ -40,18 +40,18 @@ const DragApples = () => {
         <div className="flex flex-col">
           <div
             draggable
-            onDragStart={(e) => handleDragStart(e, { type: 'image', src: '/public/apple.webp' })}
+            onDragStart={(e) => handleDragStart(e, { type: 'image', src: '/apple.webp' })}
             className="p-2 mb-2 border cursor-move flex flex-col gap-9 rounded-lg "
           >
             <div className="flex ">
-              <img src="/public/apple.webp" alt="Example" className="w-1/3 rounded-full" />
-              <img src="/public/apple.webp" alt="Example" className="w-1/3 rounded-full" />
-              <img src="/public/apple.webp" alt="Example" className="w-1/3 rounded-full" />
+              <img src="/apple.webp" alt="Example" className="w-1/3 rounded-full" />
+              <img src="/apple.webp" alt="Example" className="w-1/3 rounded-full" />
+              <img src="/apple.webp" alt="Example" className="w-1/3 rounded-full" />
             </div>
             <div className="flex">
-              <img src="/public/apple.webp" alt="Example" className="w-1/3 rounded-full" />
-              <img src="/public/apple.webp" alt="Example" className="w-1/3 rounded-full" />
-              <img src="/public/apple.webp" alt="Example" className="w-1/3 rounded-full" />
+              <img src="/apple.webp" alt="Example" className="w-1/3 rounded-full" />
+              <img src="/apple.webp" alt="Example" className="w-1/3 rounded-full" />
+              <img src="/apple.webp" alt="Example" className="w-1/3 rounded-full" />
             </div>
           </div>
           <h1 className="text-3xl font-bold">6 Apples</h1>
@@ -61,13 +61,13 @@ const DragApples = () => {
         
           <div
             draggable
-            onDragStart={(e) => handleDragStart(e, { type: 'image', src: '/public/apple.webp' })}
+            onDragStart={(e) => handleDragStart(e, { type: 'image', src: '/apple.webp' })}
             className="p-2 mb-2 border cursor-move flex rounded-lg"
           >
             
-            <img src="/public/apple.webp" alt="Example" className="w-1/3 rounded-full" />
-            <img src="/public/apple.webp" alt="Example" className="w-1/3 rounded-full" />
-            <img src="/public/apple.webp" alt="Example" className="w-1/3 rounded-full" />
+            <img src="/apple.webp" alt="Example" className="w-1/3 rounded-full" />
+            <img src="/apple.webp" alt="Example" className="w-1/3 rounded-full" />
+            <img src="/apple.webp" alt="Example" className="w-1/3 rounded-full" />
           </div>
             <h1 className='text-xl font-bold text-center'>3 Apples</h1>
           <h1 className="text-5xl font-bold text-center">+</h1>
@@ -75,11 +75,11 @@ const DragApples = () => {
 
           <div
             draggable
-            onDragStart={(e) => handleDragStart(e, { type: 'image', src: '/public/apple.webp' })}
+            onDragStart={(e) => handleDragStart(e, { type: 'image', src: '/apple.webp' })}
             className="p-2 mb-2 border cursor-move flex rounded-lg"
           >
-            <img src="/public/apple.webp" alt="Example" className="w-1/3 rounded-full" />
-            <img src="/public/apple.webp" alt="Example" className="w-1/3 rounded-full" />
+            <img src="/apple.webp" alt="Example" className="w-1/3 rounded-full" />
+            <img src="/apple.webp" alt="Example" className="w-1/3 rounded-full" />
           </div>
         </div>
       </div>

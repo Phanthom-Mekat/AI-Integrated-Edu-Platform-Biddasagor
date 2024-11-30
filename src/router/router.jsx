@@ -15,8 +15,9 @@ import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
 import PlayQuiz from "../components/Dashboard/game/Puzzle";
 import LearnAdditions from "../components/Dashboard/Math/LearnAdditions";
-import Test from "../components/Dashboard/Addition/DragApples";
+// import Test from "../components/Dashboard/Addition/DragApples";
 import DragMango from "../components/Subtraction/DragMango";
+import Addition from "../pages/Addition";
 
 const router = createBrowserRouter([
     {
@@ -83,7 +84,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/test',
-                element: <DragMango></DragMango>
+                element: <Addition></Addition>
             },
             
         ],
