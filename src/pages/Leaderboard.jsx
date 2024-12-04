@@ -3,6 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recha
 import LeaderboardTable from "../components/Dashboard/LeaderboardTable";
 import FavTopics from "../components/Dashboard/FavTopics";
 import NavBarDashboard from "../components/Dashboard/NavBarDashboard";
+import LearningProgressDashboard from "../components/Dashboard/LearningProgressDashboard";
 
 const data = [
   { day: "Mon", score: 4 },
@@ -32,6 +33,8 @@ function LeaderboardContent() {
           Top Achievers
         </h2>
         <LeaderboardTable />
+        <div className="mt-10"></div>
+       <LearningProgressDashboard></LearningProgressDashboard>
       </div>
 
       {/* Statistics Section */}
