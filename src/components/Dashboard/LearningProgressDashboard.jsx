@@ -9,9 +9,9 @@ import { motion } from 'framer-motion'
 
 const learningPaths = [
   {
-    id: 'python-basics',
-    name: 'Python Fundamentals',
-    description: 'Master the core concepts of Python programming',
+    id: 'Math Addition',
+    name: 'Math Addition',
+    description: 'Master the core concepts of Addition',
     totalLessons: 50,
     completedLessons: 30,
     difficulty: 'Beginner',
@@ -19,8 +19,8 @@ const learningPaths = [
   },
   {
     id: 'data-science',
-    name: 'Data Science Mastery',
-    description: 'Advanced techniques in data analysis and machine learning',
+    name: 'Math Subtraction',
+    description: 'Learn Math Subtraction',
     totalLessons: 75,
     completedLessons: 12,
     difficulty: 'Advanced',
@@ -28,8 +28,8 @@ const learningPaths = [
   },
   {
     id: 'web-dev',
-    name: 'Web Development Journey',
-    description: 'Full-stack web development from frontend to backend',
+    name: 'Multiplication',
+    description: 'Interactive multiplication methods',
     totalLessons: 60,
     completedLessons: 45,
     difficulty: 'Intermediate',
@@ -39,8 +39,8 @@ const learningPaths = [
 
 const achievements = [
   {
-    id: 'coding-streak',
-    name: 'Coding Streak',
+    id: 'a',
+    name: 'Puzzle Streak',
     description: 'Maintain a 30-day consecutive learning streak',
     iconColor: 'text-red-500',
     progress: 22,
