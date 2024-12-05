@@ -48,6 +48,21 @@ const Games = () => {
                             Start Quiz
                         </Link>
                     </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '900px' }}>
+      <iframe
+        src={'https://slither.io'}
+        title="IO Game"
+        style={{
+          width: '90%',
+          height: '90%',
+          border: '1px solid #ccc',
+          borderRadius: '8px',
+        }}
+        allowFullScreen
+      />
+    </div>
+
                 </div>
 
 
