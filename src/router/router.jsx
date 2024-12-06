@@ -18,6 +18,7 @@ import LearnAdditions from "../components/Dashboard/Math/LearnAdditions";
 // import Test from "../components/Dashboard/Addition/DragApples";
 import DragMango from "../components/Subtraction/DragMango";
 import Addition from "../pages/Addition";
+import GameIframe from "../pages/GameIframe";
 
 const router = createBrowserRouter([
     {
@@ -86,7 +87,10 @@ const router = createBrowserRouter([
                 path: '/dashboard/test',
                 element: <Addition></Addition>
             },
-            
+            {
+                path: '/dashboard/game',
+                element: <GameIframe></GameIframe>
+            },
         ],
     },
     {

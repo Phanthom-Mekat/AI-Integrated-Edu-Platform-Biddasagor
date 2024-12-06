@@ -18,6 +18,7 @@ const Games = () => {
                 {/* Game Options Section */}
                 <div className="mt-12 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 px-6">
                     {/* Solve Puzzle */}
+                    <Link to='/dashboard/game'>
                     <div className="bg-tertiary/20 p-6 rounded-xl shadow-md flex flex-col items-center text-center hover:scale-105 transition-transform duration-300">
                         <img
                             src="/puzzle.png"
@@ -32,6 +33,7 @@ const Games = () => {
                             Start Now
                         </Link>
                     </div>
+                    </Link>
 
                     {/* Take Quiz */}
                     <div className="bg-green-100 p-6 rounded-xl shadow-md flex flex-col items-center text-center hover:scale-105 transition-transform duration-300">
@@ -49,19 +51,6 @@ const Games = () => {
                         </Link>
                     </div>
 
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '900px' }}>
-      <iframe
-        src={'https://slither.io'}
-        title="IO Game"
-        style={{
-          width: '90%',
-          height: '90%',
-          border: '1px solid #ccc',
-          borderRadius: '8px',
-        }}
-        allowFullScreen
-      />
-    </div>
 
                 </div>
 
