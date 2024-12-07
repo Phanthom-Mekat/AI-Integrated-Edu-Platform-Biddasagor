@@ -16,9 +16,10 @@ import Register from "../components/auth/Register";
 import PlayQuiz from "../components/Dashboard/game/Puzzle";
 import LearnAdditions from "../components/Dashboard/Math/LearnAdditions";
 // import Test from "../components/Dashboard/Addition/DragApples";
-import DragMango from "../components/Subtraction/DragMango";
+// import DragMango from "../components/Subtraction/DragMango";
 import Addition from "../pages/Addition";
 import GameIframe from "../pages/GameIframe";
+import AdaptiveGame from "../pages/AdaptiveGame";
 
 const router = createBrowserRouter([
     {
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
                 path: '/dashboard/game',
                 element: <GameIframe></GameIframe>
             },
+            {
+                path: '/dashboard/adaptive',
+                element: <AdaptiveGame></AdaptiveGame>
+            }
         ],
     },
     {

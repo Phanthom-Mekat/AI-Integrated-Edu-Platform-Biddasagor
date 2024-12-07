@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
-import { 
-  Star, 
-  Clock, 
-  RefreshCw, 
-  PlusCircle, 
-  MinusCircle, 
-  XCircle 
+import {
+    Star,
+    Clock,
+    RefreshCw,
+    PlusCircle,
+    MinusCircle,
+    XCircle
 } from "lucide-react";
 
 const PlayQuiz = () => {
@@ -94,84 +94,106 @@ const PlayQuiz = () => {
         setQuestion(generateQuestion());
     };
 
+    const progressPercentage = (timeLeft / 60) * 100;
     return (
-        <div className="p-6 flex flex-col items-center gap-6 bg-gradient-to-r from-primary to-secondary min-h-screen font-['Comic_Sans_MS']">
+        <div className="min-h-screen bg-gray-50 p-8 font-sans">
             <Toaster />
-            <h1 className="text-5xl font-bold text-white drop-shadow-lg animate-bounce">
-                🧮 Math Adventure! 🚀
+            <h1 className="text-4xl font-bold text-gray-800 mb-12 text-center">
+                Math Quiz
             </h1>
 
-            <div className="bg-white p-8 rounded-2xl shadow-2xl text-center w-96 transform transition-all hover:scale-105 border-4 border-blue-300">
-                <div className="flex justify-center items-center gap-4 mb-4">
-                    {question.icon && <question.icon size={48} className={question.color} />}
-                    <h2 className="text-3xl font-bold text-gray-800">
+            <div className="max-w-md mx-auto">
+                {/* Clock Bar */}
+                <div className="mb-8">
+                    <div className="flex justify-between items-center mb-2">
+                        <div className="flex items-center gap-2 text-sm font-medium">
+                            <Clock className="w-4 h-4 text-blue-500" />
+                            <span>{timeLeft}s remaining</span>
+                        </div>
+                        <span className="text-sm font-medium flex items-center gap-1">
+                            <Star className="w-4 h-4 text-yellow-500 " />  Score: {score}
+                        </span>
+                    </div>
+                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <motion.div
+                            className="h-full bg-blue-500"
+                            initial={{ width: "100%" }}
+                            animate={{
+                                width: `${progressPercentage}%`,
+                                backgroundColor: progressPercentage < 30
+                                    ? "#EF4444" // red-500
+                                    : progressPercentage < 60
+                                        ? "#F59E0B" // amber-500
+                                        : "#3B82F6" // blue-500
+                            }}
+                            transition={{ duration: 0.3 }}
+                        />
+                    </div>
+                </div>
+
+                {/* Question Card */}
+                <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
+                    <div className="flex justify-center items-center gap-4 text-3xl font-semibold text-gray-700 mb-6">
                         {`${question.num1} ${question.symbol} ${question.num2} = ?`}
-                    </h2>
-                </div>
-                <input
-                    type="number"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    className="border-4 border-yellow-300 rounded-xl p-3 mt-4 w-full text-center text-2xl bg-yellow-100 hover:bg-yellow-200 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Your answer"
-                />
-                <button
-                    onClick={checkAnswer}
-                    className="btn bg-green-500 text-white text-2xl px-6  rounded-xl mt-4 w-full hover:bg-green-600 transition duration-200 transform active:scale-95 shadow-lg"
-                    disabled={timeLeft === 0}  
-                >
-                    Check Answer!
-                </button>
-            </div>
+                    </div>
 
-            {timeLeft === 0 && (
-                <motion.button
-                    onClick={restartGame}
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                    className="bg-orange-500 text-white text-2xl px-6 py-3 rounded-xl mt-6 hover:bg-orange-600 transition duration-200 transform active:scale-95 shadow-lg"
-                >
-                    <RefreshCw className="inline mr-2" /> Play Again!
-                </motion.button>
-            )}
+                    <input
+                        type="number"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        className="w-full px-4 py-3 text-lg border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                        placeholder="Enter your answer"
+                    />
 
-            <div className="flex gap-8 text-2xl font-bold text-white">
-                <div className="flex items-center gap-2">
-                    <Star className="text-yellow-300" />
-                    Score: {score}
+                    <button
+                        onClick={checkAnswer}
+                        className="w-full mt-4 px-4 py-3 bg-blue-600 text-white rounded-lg transition-all hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+                        disabled={timeLeft === 0}
+                    >
+                        Submit
+                    </button>
                 </div>
-                <div className="flex items-center gap-2">
-                    <Clock className="text-blue-300" />
-                    Time Left: {timeLeft}s
-                </div>
-            </div>
 
-            <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-3xl mt-6 border-4 border-purple-300">
-                <h3 className="text-2xl font-bold mb-4 text-purple-600">🏆 Your Math Journey</h3>
-                <div className="max-h-60 overflow-y-auto">
-                    {history.length === 0 ? (
-                        <p className="text-center text-gray-500">Your solved problems will appear here!</p>
-                    ) : (
-                        <ul className="space-y-3">
-                            {history.map((item, index) => (
-                                <motion.li
-                                    key={index}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className={`flex justify-between p-3 rounded-lg text-lg ${
-                                        item.correct 
-                                            ? "bg-green-200 border-2 border-green-400" 
-                                            : "bg-red-200 border-2 border-red-400"
+                {/* Game Over Button */}
+                {timeLeft === 0 && (
+                    <motion.button
+                        onClick={restartGame}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg flex items-center justify-center gap-2 hover:bg-gray-900 transition-all"
+                    >
+                        <RefreshCw className="w-4 h-4" />
+                        <span>Play Again</span>
+                    </motion.button>
+                )}
+
+                {/* History Section */}
+                <div className="mt-8">
+                    <h3 className="text-sm font-medium text-gray-500 mb-4">History</h3>
+                    <div className="space-y-2 max-h-48 overflow-y-auto">
+                        {history.map((item, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                                className={`p-3 rounded-lg text-sm ${item.correct
+                                        ? "bg-green-50 text-green-700"
+                                        : "bg-red-50 text-red-700"
                                     }`}
-                                >
+                            >
+                                <div className="flex justify-between">
                                     <span>{item.question}</span>
-                                    <span className="font-bold">{item.answer}</span>
-                                </motion.li>
-                            ))}
-                        </ul>
-                    )}
+                                    <span className="font-medium">{item.answer}</span>
+                                </div>
+                            </motion.div>
+                        ))}
+                        {history.length === 0 && (
+                            <div className="text-center text-gray-400 py-4">
+                                No answers yet
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
