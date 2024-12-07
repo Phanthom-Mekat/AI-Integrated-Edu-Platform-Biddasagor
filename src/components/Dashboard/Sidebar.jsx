@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { CiMenuBurger } from "react-icons/ci";
 import { CgGames } from "react-icons/cg";
 import { MdLeaderboard } from "react-icons/md";
+import { FaRobot } from "react-icons/fa6";
 const Sidebar = () => {
     // State to toggle dropdown visibility
     const [isLearnDropdownOpen, setLearnDropdownOpen] = useState(false);
@@ -67,6 +68,14 @@ const Sidebar = () => {
                                <div className="flex items-center gap-2 ">
                                <CgGames className="text-3xl text-red-500"></CgGames>
                                <span className="text-xl font-semibold">Games</span>
+                               </div>
+                            </Link>
+                        </li>
+                        <li className="mt-3">
+                            <Link to='/dashboard/chatbot'>
+                               <div className="flex items-center gap-2 ">
+                               <FaRobot className="text-3xl text-blue-500"></FaRobot>
+                               <span className="text-xl font-semibold">Chatbot</span>
                                </div>
                             </Link>
                         </li>

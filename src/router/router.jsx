@@ -81,7 +81,7 @@ const router = createBrowserRouter([
                 element: <Quiz></Quiz>
             },
             {
-                path: '/dashboard/learn/Math/chatbot',
+                path: '/dashboard/chatbot',
                 element: <Chatbot></Chatbot>
             },
             {
