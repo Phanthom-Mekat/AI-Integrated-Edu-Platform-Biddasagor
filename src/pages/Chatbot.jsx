@@ -1,21 +1,78 @@
 /* eslint-disable react/no-unknown-property */
 import { useState, useRef, useEffect } from 'react';
-import { Bot, User, Send, Brain, Calculator, ArrowLeft, PlayCircle, Clock, X, XCircle } from 'lucide-react';
+import { Bot, Send, Brain, Calculator, ArrowLeft, PlayCircle, Volume2, VolumeX, XCircle } from 'lucide-react';
 
 
 const VideoExplanation = ({ problem, onClose }) => {
   const parts = problem.split(/([+\-×÷])/).filter(part => part.trim());
   const num1 = parseInt(parts[0]) || 0;
   const operator = parts[1];
-  const num2 = parseInt(parts[2]) || 0;
+  const num2 = parseInt(parts[2]) || 0
+    ;
 
   const canvasRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [step, setStep] = useState(0);
+
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const generateVoiceExplanation = () => {
+    const operationName = getOperationSymbol(operator);
+    let explanation = `Let's solve ${num1} ${operator} ${num2}, which is a ${operationName} problem. `;
+
+    switch (operator) {
+      case '+':
+        explanation += `We start with ${num1}, and we're adding ${num2}. `;
+        explanation += `When we add these numbers together, we'll get ${num1 + num2}. `;
+        explanation += `Think of it like combining groups: if you have ${num1} items and add ${num2} more, you'll have a total of ${num1 + num2} items.`;
+        break;
+      case '-':
+        explanation += `We begin with ${num1}, and we're subtracting ${num2}. `;
+        explanation += `This means we're taking away ${num2} from ${num1}. `;
+        explanation += `After subtraction, we'll be left with ${num1 - num2}. `;
+        explanation += `Imagine you have ${num1} cookies and eat ${num2} of them, you'll have ${num1 - num2} cookies remaining.`;
+        break;
+      case '×':
+        explanation += `We're multiplying ${num1} by ${num2}. `;
+        explanation += `This is like adding ${num1}, ${num2} times. `;
+        explanation += `When we multiply, we'll get ${num1 * num2}. `;
+        explanation += `For example, if you have ${num2} bags with ${num1} candies in each bag, you'll have a total of ${num1 * num2} candies.`;
+        break;
+      case '÷':
+        explanation += `We're dividing ${num1} into ${num2} equal groups. `;
+        explanation += `Each group will have ${Math.floor(num1 / num2)} items. `;
+        if (num1 % num2 !== 0) {
+          explanation += `There will also be a remainder of ${num1 % num2}. `;
+        }
+        explanation += `Think of it like sharing ${num1} candies equally among ${num2} friends.`;
+        break;
+    }
+
+    return explanation;
+  };
+  const speakExplanation = () => {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(generateVoiceExplanation());
+      utterance.rate = 0.9; // Slightly slower for clarity
+      utterance.pitch = 1.0;
+
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert('Text-to-speech not supported in this browser');
+    }
+  };
+  const stopSpeaking = () => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+    }
+  };
+
 
   const getOperationSymbol = (op) => {
-    switch(op) {
+    switch (op) {
       case '×': return 'multiplication';
       case '÷': return 'division';
       case '+': return 'addition';
@@ -24,40 +81,34 @@ const VideoExplanation = ({ problem, onClose }) => {
     }
   };
 
+  const drawCircle = (ctx, x, y, color = '#7C3AED', text = '', size = 15) => {
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    if (text) {
+      ctx.fillStyle = 'white';
+      ctx.font = '12px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText(text, x, y + 4);
+    }
+  };
+
+  const drawText = (ctx, text, x, y, options = {}) => {
+    const { size = '24px', color = '#1F2937', font = 'Arial', isBold = false } = options;
+    ctx.font = `${isBold ? 'bold' : ''} ${size} ${font}`;
+    ctx.fillStyle = color;
+    ctx.fillText(text, x, y);
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     let animationFrame;
     let startTime;
-
-    const drawCircle = (x, y, color = '#7C3AED', text = '', size = 15) => {
-      ctx.beginPath();
-      ctx.arc(x, y, size, 0, Math.PI * 2);
-      ctx.fillStyle = color;
-      ctx.fill();
-      ctx.strokeStyle = '#fff';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      if (text) {
-        ctx.fillStyle = 'white';
-        ctx.font = '12px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText(text, x, y + 4);
-      }
-    };
-
-    const drawText = (text, x, y, options = {}) => {
-      const { 
-        size = '24px', 
-        color = '#1F2937', 
-        font = 'Arial',
-        isBold = false 
-      } = options;
-
-      ctx.font = `${isBold ? 'bold' : ''} ${size} ${font}`;
-      ctx.fillStyle = color;
-      ctx.fillText(text, x, y);
-    };
 
     const animate = (timestamp) => {
       if (!isPlaying) return;
@@ -69,6 +120,7 @@ const VideoExplanation = ({ problem, onClose }) => {
 
       // Draw title
       drawText(
+        ctx,
         `${getOperationSymbol(operator).toUpperCase()}: ${num1} ${operator} ${num2}`,
         canvas.width / 2,
         40,
@@ -81,24 +133,25 @@ const VideoExplanation = ({ problem, onClose }) => {
           const dotsToShow2 = Math.min(num2, Math.floor(progress * (num1 + num2)) - num1);
 
           // First number visualization
-          drawText(`First Number: ${num1}`, 150, 80, { color: '#7C3AED' });
+          drawText(ctx, `First Number: ${num1}`, 150, 80, { color: '#7C3AED' });
           for (let i = 0; i < num1; i++) {
             const x = 50 + (i % 10) * 40;
             const y = 120 + Math.floor(i / 10) * 40;
-            drawCircle(x, y, i < dotsToShow1 ? '#7C3AED' : '#E5E7EB', (i + 1).toString());
+            drawCircle(ctx, x, y, i < dotsToShow1 ? '#7C3AED' : '#E5E7EB', (i + 1).toString());
           }
 
           // Second number visualization
-          drawText(`Second Number: ${num2}`, 150, 200, { color: '#EC4899' });
+          drawText(ctx, `Second Number: ${num2}`, 150, 200, { color: '#EC4899' });
           for (let i = 0; i < num2; i++) {
             const x = 50 + (i % 10) * 40;
             const y = 240 + Math.floor(i / 10) * 40;
-            drawCircle(x, y, i < dotsToShow2 ? '#EC4899' : '#E5E7EB', (i + 1).toString());
+            drawCircle(ctx, x, y, i < dotsToShow2 ? '#EC4899' : '#E5E7EB', (i + 1).toString());
           }
 
           // Result
           if (progress > 0.8) {
             drawText(
+              ctx,
               `Total: ${num1 + num2}`,
               canvas.width / 2,
               350,
@@ -109,16 +162,13 @@ const VideoExplanation = ({ problem, onClose }) => {
 
         case '-':
           const remainingDots = Math.max(num1 - Math.floor(progress * num2), num1 - num2);
-          
-          drawText(`Starting with ${num1}`, 150, 80, { color: '#7C3AED' });
-          
+          drawText(ctx, `Starting with ${num1}`, 150, 80, { color: '#7C3AED' });
+
           for (let i = 0; i < num1; i++) {
             const x = 50 + (i % 10) * 40;
             const y = 120 + Math.floor(i / 10) * 40;
             const isRemoved = i >= remainingDots;
-            
-            drawCircle(x, y, isRemoved ? '#EF4444' : '#7C3AED', (i + 1).toString());
-            
+            drawCircle(ctx, x, y, isRemoved ? '#EF4444' : '#7C3AED', (i + 1).toString());
             if (isRemoved && progress < 0.8) {
               ctx.beginPath();
               ctx.strokeStyle = '#EF4444';
@@ -126,22 +176,17 @@ const VideoExplanation = ({ problem, onClose }) => {
               ctx.moveTo(x - 15, y - 15);
               ctx.lineTo(x + 15, y + 15);
               ctx.stroke();
-              
               ctx.moveTo(x + 15, y - 15);
               ctx.lineTo(x - 15, y + 15);
               ctx.stroke();
             }
           }
 
-          drawText(
-            `Removing ${num2}`,
-            150,
-            200,
-            { color: '#EF4444' }
-          );
+          drawText(ctx, `Removing ${num2}`, 150, 200, { color: '#EF4444' });
 
           if (progress > 0.8) {
             drawText(
+              ctx,
               `Result: ${remainingDots}`,
               canvas.width / 2,
               350,
@@ -152,31 +197,20 @@ const VideoExplanation = ({ problem, onClose }) => {
 
         case '×':
           const rows = Math.min(num2, Math.floor(progress * num2));
-          
-          drawText(
-            `${num1} repeated ${num2} times`,
-            canvas.width / 2,
-            80,
-            { color: '#7C3AED' }
-          );
-          
+          drawText(ctx, `${num1} repeated ${num2} times`, canvas.width / 2, 80, { color: '#7C3AED' });
+
           for (let i = 0; i < rows; i++) {
-            drawText(
-              `Group ${i + 1}:`,
-              50,
-              120 + (i * 50),
-              { size: '16px', color: '#6B7280' }
-            );
-            
+            drawText(ctx, `Group ${i + 1}:`, 50, 120 + (i * 50), { size: '16px', color: '#6B7280' });
             for (let j = 0; j < num1; j++) {
               const x = 120 + (j % 10) * 40;
               const y = 110 + (i * 50);
-              drawCircle(x, y, '#7C3AED', ((i * num1) + j + 1).toString());
+              drawCircle(ctx, x, y, '#7C3AED', ((i * num1) + j + 1).toString());
             }
           }
 
           if (progress > 0.8) {
             drawText(
+              ctx,
               `Result: ${num1 * num2}`,
               canvas.width / 2,
               350,
@@ -189,31 +223,20 @@ const VideoExplanation = ({ problem, onClose }) => {
           const groupsToShow = Math.min(num2, Math.floor(progress * num2));
           const itemsPerGroup = Math.floor(num1 / num2);
           const remainder = num1 % num2;
-          
-          drawText(
-            `Dividing ${num1} into ${num2} equal groups`,
-            canvas.width / 2,
-            80,
-            { color: '#7C3AED' }
-          );
-          
+          drawText(ctx, `Dividing ${num1} into ${num2} equal groups`, canvas.width / 2, 80, { color: '#7C3AED' });
+
           for (let i = 0; i < groupsToShow; i++) {
-            drawText(
-              `Group ${i + 1}`,
-              80,
-              130 + (i * 60),
-              { size: '16px', color: '#6B7280' }
-            );
-            
+            drawText(ctx, `Group ${i + 1}`, 80, 130 + (i * 60), { size: '16px', color: '#6B7280' });
             for (let j = 0; j < itemsPerGroup; j++) {
               const x = 150 + (j * 35);
               const y = 120 + (i * 60);
-              drawCircle(x, y, '#7C3AED', ((i * itemsPerGroup) + j + 1).toString());
+              drawCircle(ctx, x, y, '#7C3AED', ((i * itemsPerGroup) + j + 1).toString());
             }
           }
 
           if (progress > 0.8) {
             drawText(
+              ctx,
               `Each group has ${itemsPerGroup}${remainder ? ` (Remainder: ${remainder})` : ''}`,
               canvas.width / 2,
               350,
@@ -247,6 +270,25 @@ const VideoExplanation = ({ problem, onClose }) => {
             {getOperationSymbol(operator)} of {num1} {operator} {num2}
           </h3>
           <div className="flex items-center gap-4">
+            {/* Voice explanation button */}
+            {!isSpeaking ? (
+              <button
+                onClick={speakExplanation}
+                className="px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors flex items-center gap-2"
+              >
+                <Volume2 className="w-5 h-5" />
+                Explain
+              </button>
+            ) : (
+              <button
+                onClick={stopSpeaking}
+                className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors flex items-center gap-2"
+              >
+                <VolumeX className="w-5 h-5" />
+                Stop
+              </button>
+            )}
+
             <button
               onClick={() => {
                 setIsPlaying(!isPlaying);
@@ -290,6 +332,8 @@ const VideoExplanation = ({ problem, onClose }) => {
 
 
 
+
+
 function Chatbot() {
   const [messages, setMessages] = useState([
     {
@@ -320,6 +364,8 @@ function Chatbot() {
     return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
+
+  
   const getRandomEncouragement = () => {
     const encouragements = [
       "Great job! You're mastering this! 🌟",
@@ -335,6 +381,39 @@ function Chatbot() {
     ];
     return encouragements[Math.floor(Math.random() * encouragements.length)];
   };
+  const generateEducationalInsight = (operator) => {
+    switch (operator) {
+      case '+':
+        return [
+          "🧠 Fun Fact: Addition is like building blocks - each number adds more to your total!",
+          "🔍 Math Insight: Addition helps us understand how quantities combine and grow.",
+          "🌱 Learning Tip: Think of addition as 'putting things together' in real life.",
+          "📊 Problem-Solving Skill: Addition teaches us how to accumulate and track quantities."
+        ];
+      case '-':
+        return [
+          "🧠 Fun Fact: Subtraction helps us understand how quantities decrease or compare.",
+          "🔍 Math Insight: Subtraction is like 'taking away' or finding the difference between numbers.",
+          "🌱 Learning Tip: Imagine subtraction as removing items from a group.",
+          "📊 Problem-Solving Skill: Subtraction helps develop logical thinking and comparison skills."
+        ];
+      case '×':
+        return [
+          "🧠 Fun Fact: Multiplication is repeated addition - it's like fast-tracking counting!",
+          "🔍 Math Insight: Multiplication shows how numbers can grow exponentially.",
+          "🌱 Learning Tip: Think of multiplication as creating equal groups quickly.",
+          "📊 Problem-Solving Skill: Multiplication helps understand scaling and proportional relationships."
+        ];
+      case '÷':
+        return [
+          "🧠 Fun Fact: Division helps us share things equally and understand proportions.",
+          "🔍 Math Insight: Division breaks down larger quantities into manageable parts.",
+          "🌱 Learning Tip: Imagine division as fairly distributing items among groups.",
+          "📊 Problem-Solving Skill: Division teaches fair sharing and understanding remainders."
+        ];
+    }
+  };
+
 
   const generateExplanation = (expression) => {
     const numbers = expression.match(/\d+/g).map(Number);
@@ -343,21 +422,32 @@ function Chatbot() {
     let result;
     let explanation;
     let steps = [];
-    let visualSteps = [];
+
+    const educationalInsights = generateEducationalInsight(operator);
+    const randomInsight = educationalInsights[Math.floor(Math.random() * educationalInsights.length)];
 
     switch (operator) {
       case '+':
         result = numbers[0] + numbers[1];
-        visualSteps = Array(numbers[0] + numbers[1]).fill('🔵');
         steps = [
-          `💡 Let's solve ${numbers[0]} + ${numbers[1]}`,
-          `1️⃣ First number: ${numbers[0]}\n${'🔵'.repeat(numbers[0])}`,
-          `2️⃣ Second number: ${numbers[1]}\n${'🟡'.repeat(numbers[1])}`,
-          `3️⃣ When we add them together:\n${'🔵'.repeat(numbers[0])}${'🟡'.repeat(numbers[1])}`,
-          `4️⃣ Step by step:\n   ${numbers[0]}\n   + ${numbers[1]}\n   ${'━'.repeat(6)}\n   ${result}`,
-          `\n✨ Final Answer: ${result}`,
-          `\n📝 Key Concept: Addition combines quantities together`,
-          `\n🌟 Real World Example:\nIf you have ${numbers[0]} apples and get ${numbers[1]} more,\nyou'll end up with ${result} apples!`,
+          `🌈 Let's explore ${numbers[0]} + ${numbers[1]} together!`,
+          `1️⃣ Starting number: ${numbers[0]} 
+           Visualization: ${'🟣'.repeat(numbers[0])}`,
+          `2️⃣ Number to add: ${numbers[1]} 
+           Visualization: ${'🟠'.repeat(numbers[1])}`,
+          `3️⃣ Combining numbers: 
+           ${'🟣'.repeat(numbers[0])}${'🟠'.repeat(numbers[1])}`,
+          `4️⃣ Solving step by step:
+           ${numbers[0]}
+         + ${numbers[1]}
+         ───────
+           ${result}`,
+          `✨ Magic Moment: We transformed ${numbers[0]} and ${numbers[1]} into ${result}!`,
+          `📚 Mathematical Journey:
+           • Started with ${numbers[0]}
+           • Added ${numbers[1]}
+           • Discovered ${result}`,
+          `\n${randomInsight}`,
           `\n${getRandomEncouragement()}`
         ];
         break;
@@ -365,49 +455,72 @@ function Chatbot() {
       case '-':
         result = numbers[0] - numbers[1];
         steps = [
-          `💡 Let's solve ${numbers[0]} - ${numbers[1]}`,
-          `1️⃣ Starting with: ${numbers[0]}\n${'🔵'.repeat(numbers[0])}`,
-          `2️⃣ Taking away: ${numbers[1]}\n${'🟡'.repeat(numbers[1])}`,
-          `3️⃣ After subtraction:\n${'🔵'.repeat(result)}`,
-          `4️⃣ Step by step:\n   ${numbers[0]}\n   - ${numbers[1]}\n   ${'━'.repeat(6)}\n   ${result}`,
-          `\n✨ Final Answer: ${result}`,
-          `\n📝 Key Concept: Subtraction finds what remains after taking away`,
-          `\n🌟 Real World Example:\nIf you have ${numbers[0]} cookies and eat ${numbers[1]} of them,\nyou'll have ${result} cookies left!`,
+          `🌈 Let's unravel the mystery of ${numbers[0]} - ${numbers[1]}!`,
+          `1️⃣ Initial collection: ${numbers[0]} 
+           Visualization: ${'🟣'.repeat(numbers[0])}`,
+          `2️⃣ Items to remove: ${numbers[1]} 
+           Visualization: ${'🔴'.repeat(numbers[1])}`,
+          `3️⃣ Subtracting carefully: 
+           Remaining: ${'🟣'.repeat(result)}`,
+          `4️⃣ Solving step by step:
+           ${numbers[0]}
+         - ${numbers[1]}
+         ───────
+           ${result}`,
+          `✨ Detective Work: We tracked down the remaining quantity!`,
+          `📚 Mathematical Journey:
+           • Started with ${numbers[0]}
+           • Removed ${numbers[1]}
+           • Discovered ${result}`,
+          `\n${randomInsight}`,
           `\n${getRandomEncouragement()}`
         ];
         break;
 
       case '×':
-        {
-          result = numbers[0] * numbers[1];
-          let multiplicationVisual = Array(numbers[1])
-            .fill('🔵'.repeat(numbers[0]))
-            .join('\n');
-          steps = [
-            `💡 Let's solve ${numbers[0]} × ${numbers[1]}`,
-            `1️⃣ We're multiplying ${numbers[0]} by ${numbers[1]}`,
-            `2️⃣ This means adding ${numbers[0]}, ${numbers[1]} times:`,
-            `3️⃣ Visual representation:\n${multiplicationVisual}`,
-            `4️⃣ Step by step:\n   ${numbers[0]}\n   × ${numbers[1]}\n   ${'━'.repeat(6)}\n   ${result}`,
-            `\n✨ Final Answer: ${result}`,
-            `\n📝 Key Concept: Multiplication is repeated addition`,
-            `\n🌟 Real World Example:\nIf you have ${numbers[1]} bags with ${numbers[0]} candies each,\nyou have ${result} candies in total!`,
-            `\n${getRandomEncouragement()}`
-          ];
-          break;
-        }
+        result = numbers[0] * numbers[1];
+        steps = [
+          `🌈 Let's multiply ${numbers[0]} × ${numbers[1]} and unlock mathematical magic!`,
+          `1️⃣ First number groups: ${numbers[0]} 
+           Visualization: ${'🟣'.repeat(numbers[0])}`,
+          `2️⃣ Repeat groups: ${numbers[1]} times
+           Visualization: ${'🟣'.repeat(numbers[0])} × ${numbers[1]} groups`,
+          `3️⃣ Multiplying visualized: 
+           ${'🟣'.repeat(result)}`,
+          `4️⃣ Solving step by step:
+           ${numbers[0]}
+         × ${numbers[1]}
+         ───────
+           ${result}`,
+          `✨ Multiplication Magic: We expanded numbers exponentially!`,
+          `📚 Mathematical Journey:
+           • Grouped ${numbers[0]} 
+           • Repeated ${numbers[1]} times
+           • Created ${result}`,
+          `\n${randomInsight}`,
+          `\n${getRandomEncouragement()}`
+        ];
+        break;
 
       case '÷':
-        result = numbers[0] / numbers[1];
+        result = Math.floor(numbers[0] / numbers[1]);
+        const remainder = numbers[0] % numbers[1];
         steps = [
-          `💡 Let's solve ${numbers[0]} ÷ ${numbers[1]}`,
-          `1️⃣ We're dividing ${numbers[0]} into ${numbers[1]} equal parts`,
-          `2️⃣ Each part will have: ${result} units`,
-          `3️⃣ Verification: ${numbers[1]} × ${result} = ${numbers[0]}`,
-          `4️⃣ Step by step:\n   ${numbers[0]}\n   ÷ ${numbers[1]}\n   ${'━'.repeat(6)}\n   ${result}`,
-          `\n✨ Final Answer: ${result}`,
-          `\n📝 Key Concept: Division shares into equal groups`,
-          `\n🌟 Real World Example:\nIf you share ${numbers[0]} candies among ${numbers[1]} friends,\neach friend gets ${result} candies!`,
+          `🌈 Let's divide ${numbers[0]} ÷ ${numbers[1]} and explore fair sharing!`,
+          `1️⃣ Total collection: ${numbers[0]} 
+           Visualization: ${'🟣'.repeat(numbers[0])}`,
+          `2️⃣ Sharing into groups: ${numbers[1]} 
+           Each group gets: ${result}`,
+          `3️⃣ Division visualized: 
+           ${numbers[1]} groups of ${result}`,
+          `4️⃣ Solving step by step:
+           ${numbers[0]} ÷ ${numbers[1]} = ${result}${remainder ? ` R${remainder}` : ''}`,
+          `✨ Sharing Adventure: We distributed numbers fairly!`,
+          `📚 Mathematical Journey:
+           • Started with ${numbers[0]}
+           • Divided into ${numbers[1]} groups
+           • Each group received ${result}${remainder ? ` with ${remainder} left over` : ''}`,
+          `\n${randomInsight}`,
           `\n${getRandomEncouragement()}`
         ];
         break;
@@ -416,6 +529,9 @@ function Chatbot() {
     explanation = steps.join('\n\n');
     return { result, explanation };
   };
+
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -563,7 +679,7 @@ function Chatbot() {
             <div className="mt-2 text-xs text-gray-400 text-center">
               Type a mathematical expression using +, -, ×, or ÷
             </div>
-          </div>  
+          </div>
         </div>
 
         {/* Optional: Quick Action Buttons */}
