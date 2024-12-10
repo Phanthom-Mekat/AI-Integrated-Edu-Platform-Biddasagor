@@ -39,7 +39,7 @@ const PlayQuiz = () => {
         const operations = [
             { symbol: "+", icon: PlusCircle, color: "text-green-500" },
             { symbol: "-", icon: MinusCircle, color: "text-blue-500" },
-            { symbol: "×", icon: XCircle, color: "text-purple-500" }
+            { symbol: "*", icon: XCircle, color: "text-purple-500" }
         ];
         const operation = operations[Math.floor(Math.random() * operations.length)];
         return { num1, num2, ...operation };

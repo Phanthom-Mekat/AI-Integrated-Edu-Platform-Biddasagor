@@ -4,7 +4,7 @@ import { Bot, Send, Brain, Calculator, ArrowLeft, PlayCircle, Volume2, VolumeX, 
 
 
 const VideoExplanation = ({ problem, onClose }) => {
-  const parts = problem.split(/([+\-×÷])/).filter(part => part.trim());
+  const parts = problem.split(/([+\-*÷])/).filter(part => part.trim());
   const num1 = parseInt(parts[0]) || 0;
   const operator = parts[1];
   const num2 = parseInt(parts[2]) || 0
@@ -31,7 +31,7 @@ const VideoExplanation = ({ problem, onClose }) => {
         explanation += `After subtraction, we'll be left with ${num1 - num2}. `;
         explanation += `Imagine you have ${num1} cookies and eat ${num2} of them, you'll have ${num1 - num2} cookies remaining.`;
         break;
-      case '×':
+      case '*':
         explanation += `We're multiplying ${num1} by ${num2}. `;
         explanation += `This is like adding ${num1}, ${num2} times. `;
         explanation += `When we multiply, we'll get ${num1 * num2}. `;
@@ -73,7 +73,7 @@ const VideoExplanation = ({ problem, onClose }) => {
 
   const getOperationSymbol = (op) => {
     switch (op) {
-      case '×': return 'multiplication';
+      case '*': return 'multiplication';
       case '÷': return 'division';
       case '+': return 'addition';
       case '-': return 'subtraction';
@@ -195,7 +195,7 @@ const VideoExplanation = ({ problem, onClose }) => {
           }
           break;
 
-        case '×':
+        case '*':
           const rows = Math.min(num2, Math.floor(progress * num2));
           drawText(ctx, `${num1} repeated ${num2} times`, canvas.width / 2, 80, { color: '#7C3AED' });
 
@@ -338,7 +338,7 @@ function Chatbot() {
   const [messages, setMessages] = useState([
     {
       isBot: true,
-      message: "Hi! I'm your math buddy! Try these:\n• Addition (12+13)\n• Subtraction (25-10)\n• Multiplication (4×6)\n• Division (15÷3)",
+      message: "Hi! I'm your math buddy! Try these:\n• Addition (12+13)\n• Subtraction (25-10)\n• Multiplication (4*6)\n• Division (15÷3)",
       type: 'welcome'
     },
   ]);
@@ -397,7 +397,7 @@ function Chatbot() {
           "🌱 Learning Tip: Imagine subtraction as removing items from a group.",
           "📊 Problem-Solving Skill: Subtraction helps develop logical thinking and comparison skills."
         ];
-      case '×':
+      case '*':
         return [
           "🧠 Fun Fact: Multiplication is repeated addition - it's like fast-tracking counting!",
           "🔍 Math Insight: Multiplication shows how numbers can grow exponentially.",
@@ -417,7 +417,7 @@ function Chatbot() {
 
   const generateExplanation = (expression) => {
     const numbers = expression.match(/\d+/g).map(Number);
-    const operator = expression.match(/[+\-×÷]/)?.[0];
+    const operator = expression.match(/[+\-*÷]/)?.[0];
 
     let result;
     let explanation;
@@ -477,19 +477,19 @@ function Chatbot() {
         ];
         break;
 
-      case '×':
+      case '*':
         result = numbers[0] * numbers[1];
         steps = [
-          `🌈 Let's multiply ${numbers[0]} × ${numbers[1]} and unlock mathematical magic!`,
+          `🌈 Let's multiply ${numbers[0]} * ${numbers[1]} and unlock mathematical magic!`,
           `1️⃣ First number groups: ${numbers[0]} 
            Visualization: ${'🟣'.repeat(numbers[0])}`,
           `2️⃣ Repeat groups: ${numbers[1]} times
-           Visualization: ${'🟣'.repeat(numbers[0])} × ${numbers[1]} groups`,
+           Visualization: ${'🟣'.repeat(numbers[0])} * ${numbers[1]} groups`,
           `3️⃣ Multiplying visualized: 
            ${'🟣'.repeat(result)}`,
           `4️⃣ Solving step by step:
            ${numbers[0]}
-         × ${numbers[1]}
+         * ${numbers[1]}
          ───────
            ${result}`,
           `✨ Multiplication Magic: We expanded numbers exponentially!`,
@@ -547,7 +547,7 @@ function Chatbot() {
     ];
 
     const mathExpression = input.replace(/\s/g, '');
-    if (/^\d+[+\-×÷]\d+$/.test(mathExpression)) {
+    if (/^\d+[+\-*÷]\d+$/.test(mathExpression)) {
       const { result, explanation } = generateExplanation(mathExpression);
       newMessages.push({
         isBot: true,
@@ -560,7 +560,7 @@ function Chatbot() {
     } else {
       newMessages.push({
         isBot: true,
-        message: "Please enter a valid math problem! Try these formats:\n• Addition: 12+13\n• Subtraction: 25-10\n• Multiplication: 4×6\n• Division: 15÷3",
+        message: "Please enter a valid math problem! Try these formats:\n• Addition: 12+13\n• Subtraction: 25-10\n• Multiplication: 4*6\n• Division: 15÷3",
         time: getCurrentTime()
       });
     }
@@ -664,7 +664,7 @@ function Chatbot() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Type a math problem (e.g., 12+13, 25-10, 4×6, 15÷3)..."
+                placeholder="Type a math problem (e.g., 12+13, 25-10, 4*6, 15÷3)..."
                 className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 autoComplete="off"
               />
@@ -677,7 +677,7 @@ function Chatbot() {
               </button>
             </form>
             <div className="mt-2 text-xs text-gray-400 text-center">
-              Type a mathematical expression using +, -, ×, or ÷
+              Type a mathematical expression using +, -, *, or ÷
             </div>
           </div>
         </div>
@@ -697,7 +697,7 @@ function Chatbot() {
             Subtraction Example
           </button>
           <button
-            onClick={() => setInput('4×6')}
+            onClick={() => setInput('4*6')}
             className="px-4 py-2 bg-white rounded-full text-sm text-gray-600 hover:bg-gray-100 transition-colors shadow-sm"
           >
             Multiplication Example
