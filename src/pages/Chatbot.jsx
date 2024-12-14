@@ -335,387 +335,426 @@ const VideoExplanation = ({ problem, onClose }) => {
 
 
 function Chatbot() {
-  const [messages, setMessages] = useState([
-    {
-      isBot: true,
-      message: "Hi! I'm your math buddy! Try these:\n• Addition (12+13)\n• Subtraction (25-10)\n• Multiplication (4*6)\n• Division (15÷3)",
-      type: 'welcome'
-    },
-  ]);
-  const [input, setInput] = useState('');
-  const messagesEndRef = useRef(null);
-
-  const [videoModal, setVideoModal] = useState({
-    isOpen: false,
-    problem: null
-  });
-  // Auto-scroll functionality
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  // Get current time
-  const getCurrentTime = () => {
-    const now = new Date();
-    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  };
-
-
-  
-  const getRandomEncouragement = () => {
-    const encouragements = [
-      "Great job! You're mastering this! 🌟",
-      "Excellent work! Keep that brain working! 💪",
-      "Perfect! You're on a roll! 🚀",
-      "Math is your superpower! 📚",
-      "You're becoming a math champion! ✨",
-      "Outstanding effort! Keep shining! 🎯",
-      "You're solving like a pro! 💫",
-      "Your math skills are growing! 🧠",
-      "Fantastic progress! 🌈",
-      "You're a natural problem solver! 🎨"
-    ];
-    return encouragements[Math.floor(Math.random() * encouragements.length)];
-  };
-  const generateEducationalInsight = (operator) => {
-    switch (operator) {
-      case '+':
-        return [
-          "🧠 Fun Fact: Addition is like building blocks - each number adds more to your total!",
-          "🔍 Math Insight: Addition helps us understand how quantities combine and grow.",
-          "🌱 Learning Tip: Think of addition as 'putting things together' in real life.",
-          "📊 Problem-Solving Skill: Addition teaches us how to accumulate and track quantities."
-        ];
-      case '-':
-        return [
-          "🧠 Fun Fact: Subtraction helps us understand how quantities decrease or compare.",
-          "🔍 Math Insight: Subtraction is like 'taking away' or finding the difference between numbers.",
-          "🌱 Learning Tip: Imagine subtraction as removing items from a group.",
-          "📊 Problem-Solving Skill: Subtraction helps develop logical thinking and comparison skills."
-        ];
-      case '*':
-        return [
-          "🧠 Fun Fact: Multiplication is repeated addition - it's like fast-tracking counting!",
-          "🔍 Math Insight: Multiplication shows how numbers can grow exponentially.",
-          "🌱 Learning Tip: Think of multiplication as creating equal groups quickly.",
-          "📊 Problem-Solving Skill: Multiplication helps understand scaling and proportional relationships."
-        ];
-      case '÷':
-        return [
-          "🧠 Fun Fact: Division helps us share things equally and understand proportions.",
-          "🔍 Math Insight: Division breaks down larger quantities into manageable parts.",
-          "🌱 Learning Tip: Imagine division as fairly distributing items among groups.",
-          "📊 Problem-Solving Skill: Division teaches fair sharing and understanding remainders."
-        ];
-    }
-  };
-
-
-  const generateExplanation = (expression) => {
-    const numbers = expression.match(/\d+/g).map(Number);
-    const operator = expression.match(/[+\-*÷]/)?.[0];
-
-    let result;
-    let explanation;
-    let steps = [];
-
-    const educationalInsights = generateEducationalInsight(operator);
-    const randomInsight = educationalInsights[Math.floor(Math.random() * educationalInsights.length)];
-
-    switch (operator) {
-      case '+':
-        result = numbers[0] + numbers[1];
-        steps = [
-          `🌈 Let's explore ${numbers[0]} + ${numbers[1]} together!`,
-          `1️⃣ Starting number: ${numbers[0]} 
-           Visualization: ${'🟣'.repeat(numbers[0])}`,
-          `2️⃣ Number to add: ${numbers[1]} 
-           Visualization: ${'🟠'.repeat(numbers[1])}`,
-          `3️⃣ Combining numbers: 
-           ${'🟣'.repeat(numbers[0])}${'🟠'.repeat(numbers[1])}`,
-          `4️⃣ Solving step by step:
-           ${numbers[0]}
-         + ${numbers[1]}
-         ───────
-           ${result}`,
-          `✨ Magic Moment: We transformed ${numbers[0]} and ${numbers[1]} into ${result}!`,
-          `📚 Mathematical Journey:
-           • Started with ${numbers[0]}
-           • Added ${numbers[1]}
-           • Discovered ${result}`,
-          `\n${randomInsight}`,
-          `\n${getRandomEncouragement()}`
-        ];
-        break;
-
-      case '-':
-        result = numbers[0] - numbers[1];
-        steps = [
-          `🌈 Let's unravel the mystery of ${numbers[0]} - ${numbers[1]}!`,
-          `1️⃣ Initial collection: ${numbers[0]} 
-           Visualization: ${'🟣'.repeat(numbers[0])}`,
-          `2️⃣ Items to remove: ${numbers[1]} 
-           Visualization: ${'🔴'.repeat(numbers[1])}`,
-          `3️⃣ Subtracting carefully: 
-           Remaining: ${'🟣'.repeat(result)}`,
-          `4️⃣ Solving step by step:
-           ${numbers[0]}
-         - ${numbers[1]}
-         ───────
-           ${result}`,
-          `✨ Detective Work: We tracked down the remaining quantity!`,
-          `📚 Mathematical Journey:
-           • Started with ${numbers[0]}
-           • Removed ${numbers[1]}
-           • Discovered ${result}`,
-          `\n${randomInsight}`,
-          `\n${getRandomEncouragement()}`
-        ];
-        break;
-
-      case '*':
-        result = numbers[0] * numbers[1];
-        steps = [
-          `🌈 Let's multiply ${numbers[0]} * ${numbers[1]} and unlock mathematical magic!`,
-          `1️⃣ First number groups: ${numbers[0]} 
-           Visualization: ${'🟣'.repeat(numbers[0])}`,
-          `2️⃣ Repeat groups: ${numbers[1]} times
-           Visualization: ${'🟣'.repeat(numbers[0])} * ${numbers[1]} groups`,
-          `3️⃣ Multiplying visualized: 
-           ${'🟣'.repeat(result)}`,
-          `4️⃣ Solving step by step:
-           ${numbers[0]}
-         * ${numbers[1]}
-         ───────
-           ${result}`,
-          `✨ Multiplication Magic: We expanded numbers exponentially!`,
-          `📚 Mathematical Journey:
-           • Grouped ${numbers[0]} 
-           • Repeated ${numbers[1]} times
-           • Created ${result}`,
-          `\n${randomInsight}`,
-          `\n${getRandomEncouragement()}`
-        ];
-        break;
-
-      case '÷':
-        result = Math.floor(numbers[0] / numbers[1]);
-        const remainder = numbers[0] % numbers[1];
-        steps = [
-          `🌈 Let's divide ${numbers[0]} ÷ ${numbers[1]} and explore fair sharing!`,
-          `1️⃣ Total collection: ${numbers[0]} 
-           Visualization: ${'🟣'.repeat(numbers[0])}`,
-          `2️⃣ Sharing into groups: ${numbers[1]} 
-           Each group gets: ${result}`,
-          `3️⃣ Division visualized: 
-           ${numbers[1]} groups of ${result}`,
-          `4️⃣ Solving step by step:
-           ${numbers[0]} ÷ ${numbers[1]} = ${result}${remainder ? ` R${remainder}` : ''}`,
-          `✨ Sharing Adventure: We distributed numbers fairly!`,
-          `📚 Mathematical Journey:
-           • Started with ${numbers[0]}
-           • Divided into ${numbers[1]} groups
-           • Each group received ${result}${remainder ? ` with ${remainder} left over` : ''}`,
-          `\n${randomInsight}`,
-          `\n${getRandomEncouragement()}`
-        ];
-        break;
-    }
-
-    explanation = steps.join('\n\n');
-    return { result, explanation };
-  };
-
-
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
-    const newMessages = [
-      ...messages,
+    const [messages, setMessages] = useState([
       {
-        isBot: false,
-        message: input,
-        time: getCurrentTime()
+        isBot: true,
+        message: "Hi! I'm your math buddy! Try these:\n• Addition (12+13)\n• Subtraction (25-10)\n• Multiplication (4*6)\n• Division (15÷3)",
+        type: 'welcome'
+      },
+    ]);
+    const [input, setInput] = useState('');
+    const messagesEndRef = useRef(null);
+  
+    const [videoModal, setVideoModal] = useState({
+      isOpen: false,
+      problem: null
+    });
+    const [currentQuestion, setCurrentQuestion] = useState(null);
+    const [currentOperator, setCurrentOperator] = useState(null);
+    const [isAnswering, setIsAnswering] = useState(false);
+  
+    // Auto-scroll functionality
+    const scrollToBottom = () => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+  
+    useEffect(() => {
+      scrollToBottom();
+    }, [messages]);
+  
+    // Get current time
+    const getCurrentTime = () => {
+      const now = new Date();
+      return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    };
+  
+    const getRandomEncouragement = () => {
+      const encouragements = [
+        "Great job! You're mastering this! 🌟",
+        "Excellent work! Keep that brain working! 💪",
+        "Perfect! You're on a roll! 🚀",
+        "Math is your superpower! 📚",
+        "You're becoming a math champion! ✨",
+        "Outstanding effort! Keep shining! 🎯",
+        "You're solving like a pro! 💫",
+        "Your math skills are growing! 🧠",
+        "Fantastic progress! 🌈",
+        "You're a natural problem solver! 🎨"
+      ];
+      return encouragements[Math.floor(Math.random() * encouragements.length)];
+    };
+  
+    const generateEducationalInsight = (operator) => {
+      switch (operator) {
+        case '+':
+          return [
+            "🧠 Fun Fact: Addition is like building blocks - each number adds more to your total!",
+            "🔍 Math Insight: Addition helps us understand how quantities combine and grow.",
+            "🌱 Learning Tip: Think of addition as 'putting things together' in real life.",
+            "📊 Problem-Solving Skill: Addition teaches us how to accumulate and track quantities."
+          ];
+        case '-':
+          return [
+            "🧠 Fun Fact: Subtraction helps us understand how quantities decrease or compare.",
+            "🔍 Math Insight: Subtraction is like 'taking away' or finding the difference between numbers.",
+            "🌱 Learning Tip: Imagine subtraction as removing items from a group.",
+            "📊 Problem-Solving Skill: Subtraction helps develop logical thinking and comparison skills."
+          ];
+        case '*':
+          return [
+            "🧠 Fun Fact: Multiplication is repeated addition - it's like fast-tracking counting!",
+            "🔍 Math Insight: Multiplication shows how numbers can grow exponentially.",
+            "🌱 Learning Tip: Think of multiplication as creating equal groups quickly.",
+            "📊 Problem-Solving Skill: Multiplication helps understand scaling and proportional relationships."
+          ];
+        case '÷':
+          return [
+            "🧠 Fun Fact: Division helps us share things equally and understand proportions.",
+            "🔍 Math Insight: Division breaks down larger quantities into manageable parts.",
+            "🌱 Learning Tip: Imagine division as fairly distributing items among groups.",
+            "📊 Problem-Solving Skill: Division teaches fair sharing and understanding remainders."
+          ];
       }
-    ];
-
-    const mathExpression = input.replace(/\s/g, '');
-    if (/^\d+[+\-*÷]\d+$/.test(mathExpression)) {
-      const { result, explanation } = generateExplanation(mathExpression);
-      newMessages.push({
-        isBot: true,
-        message: explanation,
-        result: result,
-        hasVideo: true,
-        problem: mathExpression,
-        time: getCurrentTime()
-      });
-    } else {
-      newMessages.push({
-        isBot: true,
-        message: "Please enter a valid math problem! Try these formats:\n• Addition: 12+13\n• Subtraction: 25-10\n• Multiplication: 4*6\n• Division: 15÷3",
-        time: getCurrentTime()
-      });
-    }
-
-    setMessages(newMessages);
-    setInput('');
-  };
+    };
+  
+    const generateExplanation = (expression) => {
+      const numbers = expression.match(/\d+/g).map(Number);
+      const operator = expression.match(/[+\-*÷]/)?.[0];
+  
+      let result;
+      let explanation;
+      let steps = [];
+  
+      const educationalInsights = generateEducationalInsight(operator);
+      const randomInsight = educationalInsights[Math.floor(Math.random() * educationalInsights.length)];
+  
+      switch (operator) {
+        case '+':
+          result = numbers[0] + numbers[1];
+          steps = [
+            `🌈 Let's explore ${numbers[0]} + ${numbers[1]} together!`,
+            `1️⃣ Starting number: ${numbers[0]} 
+             Visualization: ${'🟣'.repeat(numbers[0])}`,
+            `2️⃣ Number to add: ${numbers[1]} 
+             Visualization: ${'🟠'.repeat(numbers[1])}`,
+            `3️⃣ Combining numbers: 
+             ${'🟣'.repeat(numbers[0])}${'🟠'.repeat(numbers[1])}`,
+            `4️⃣ Solving step by step:
+             ${numbers[0]}
+           + ${numbers[1]}
+           ───────
+             ${result}`,
+            `✨ Magic Moment: We transformed ${numbers[0]} and ${numbers[1]} into ${result}!`,
+            `📚 Mathematical Journey:
+             • Started with ${numbers[0]}
+             • Added ${numbers[1]}
+             • Discovered ${result}`,
+            `\n${randomInsight}`,
+            `\n${getRandomEncouragement()}`
+          ];
+          break;
+  
+        case '-':
+          result = numbers[0] - numbers[1];
+          steps = [
+            `🌈 Let's unravel the mystery of ${numbers[0]} - ${numbers[1]}!`,
+            `1️⃣ Initial collection: ${numbers[0]} 
+             Visualization: ${'🟣'.repeat(numbers[0])}`,
+            `2️⃣ Items to remove: ${numbers[1]} 
+             Visualization: ${'🔴'.repeat(numbers[1])}`,
+            `3️⃣ Subtracting carefully: 
+             Remaining: ${'🟣'.repeat(result)}`,
+            `4️⃣ Solving step by step:
+             ${numbers[0]}
+           - ${numbers[1]}
+           ───────
+             ${result}`,
+            `✨ Detective Work: We tracked down the remaining quantity!`,
+            `📚 Mathematical Journey:
+             • Started with ${numbers[0]}
+             • Removed ${numbers[1]}
+             • Discovered ${result}`,
+            `\n${randomInsight}`,
+            `\n${getRandomEncouragement()}`
+          ];
+          break;
+  
+        case '*':
+          result = numbers[0] * numbers[1];
+          steps = [
+            `🌈 Let's multiply ${numbers[0]} * ${numbers[1]} and unlock mathematical magic!`,
+            `1️⃣ First number groups: ${numbers[0]} 
+             Visualization: ${'🟣'.repeat(numbers[0])}`,
+            `2️⃣ Repeat groups: ${numbers[1]} times
+             Visualization: ${'🟣'.repeat(numbers[0])} * ${numbers[1]} groups`,
+            `3️⃣ Multiplying visualized: 
+             ${'🟣'.repeat(result)}`,
+            `4️⃣ Solving step by step:
+             ${numbers[0]}
+           * ${numbers[1]}
+           ───────
+             ${result}`,
+            `✨ Multiplication Magic: We expanded numbers exponentially!`,
+            `📚 Mathematical Journey:
+             • Grouped ${numbers[0]} 
+             • Repeated ${numbers[1]} times
+             • Created ${result}`,
+            `\n${randomInsight}`,
+            `\n${getRandomEncouragement()}`
+          ];
+          break;
+  
+        case '÷':
+          result = Math.floor(numbers[0] / numbers[1]);
+          const remainder = numbers[0] % numbers[1];
+          steps = [
+            `🌈 Let's divide ${numbers[0]} ÷ ${numbers[1]} and explore fair sharing!`,
+            `1️⃣ Total collection: ${numbers[0]} 
+             Visualization: ${'🟣'.repeat(numbers[0])}`,
+            `2️⃣ Sharing into groups: ${numbers[1]} 
+             Each group gets: ${result}`,
+            `3️⃣ Division visualized: 
+             ${numbers[1]} groups of ${result}`,
+            `4️⃣ Solving step by step:
+             ${numbers[0]} ÷ ${numbers[1]} = ${result}${remainder ? ` R${remainder}` : ''}`,
+            `✨ Sharing Adventure: We distributed numbers fairly!`,
+            `📚 Mathematical Journey:
+             • Started with ${numbers[0]}
+             • Divided into ${numbers[1]} groups
+             • Each group received ${result}${remainder ? ` with ${remainder} left over` : ''}`,
+            `\n${randomInsight}`,
+            `\n${getRandomEncouragement()}`
+          ];
+          break;
+      }
+  
+      explanation = steps.join('\n\n');
+      return { result, explanation };
+    };
+  
+    const generateSimilarQuestion = (operator) => {
+      const num1 = Math.floor(Math.random() * 100);
+      const num2 = Math.floor(Math.random() * 100);
+      return `${num1}${operator}${num2}`;
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (!input.trim()) return;
+  
+      const newMessages = [
+        ...messages,
+        {
+          isBot: false,
+          message: input,
+          time: getCurrentTime()
+        }
+      ];
+  
+      const mathExpression = input.replace(/\s/g, '');
+      if (/^\d+[+\-*÷]\d+$/.test(mathExpression)) {
+        const { result, explanation } = generateExplanation(mathExpression);
+        newMessages.push({
+          isBot: true,
+          message: explanation,
+          result: result,
+          hasVideo: true,
+          problem: mathExpression,
+          time: getCurrentTime()
+        });
+      } else if (input.toLowerCase().includes('similar question')) {
+        const operator = currentOperator || '+';
+        const similarQuestion = generateSimilarQuestion(operator);
+        setCurrentQuestion(similarQuestion);
+        setIsAnswering(true);
+        newMessages.push({
+          isBot: true,
+          message: `Here's a similar question: ${similarQuestion}. What's your answer?`,
+          time: getCurrentTime()
+        });
+      } else if (isAnswering && currentQuestion) {
+        const { result } = generateExplanation(currentQuestion);
+        if (parseInt(input) === result) {
+          newMessages.push({
+            isBot: true,
+            message: `Correct! The answer is ${result}. ${generateExplanation(currentQuestion).explanation}`,
+            time: getCurrentTime()
+          });
+        } else {
+          newMessages.push({
+            isBot: true,
+            message: `Oops! The correct answer was ${result}. ${generateExplanation(currentQuestion).explanation}`,
+            time: getCurrentTime()
+          });
+        }
+        setIsAnswering(false);
+        setCurrentQuestion(null);
+      } else {
+        newMessages.push({
+          isBot: true,
+          message: "Please enter a valid math problem or ask for a similar question! Try these formats:\n• Addition: 12+13\n• Subtraction: 25-10\n• Multiplication: 4*6\n• Division: 15÷3",
+          time: getCurrentTime()
+        });
+      }
+  
+      setMessages(newMessages);
+      setInput('');
+    };
+  
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b shadow-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <ArrowLeft className="h-5 w-5 text-gray-600" />
-            </button>
-            <div className="flex items-center gap-3">
-              <Brain className="h-6 w-6 text-purple-600" />
-              <h1 className="text-lg font-semibold text-gray-800">Biddasagor</h1>
-            </div>
-            <div className="flex items-center gap-2">
-              <Calculator className="h-5 w-5 text-purple-600" />
-              <div className="text-sm text-gray-500">
-                {new Date().toLocaleTimeString()}
-              </div>
+    <header className="bg-white border-b shadow-sm sticky top-0 z-10">
+      <div className="max-w-6xl mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
+          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+            <ArrowLeft className="h-5 w-5 text-gray-600" />
+          </button>
+          <div className="flex items-center gap-3">
+            <Brain className="h-6 w-6 text-purple-600" />
+            <h1 className="text-lg font-semibold text-gray-800">Biddasagor</h1>
+          </div>
+          <div className="flex items-center gap-2">
+            <Calculator className="h-5 w-5 text-purple-600" />
+            <div className="text-sm text-gray-500">
+              {new Date().toLocaleTimeString()}
             </div>
           </div>
         </div>
-      </header>
+      </div>
+    </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-6">
-        <div className="bg-white rounded-lg shadow-sm min-h-[600px] flex flex-col">
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`flex gap-3 ${msg.isBot ? 'justify-start' : 'justify-end'
-                  } animate-fade-in`}
-              >
-                {msg.isBot ? (
-                  <div className="flex gap-3 max-w-[100%] bg-purple-50 p-4 rounded-lg">
-                    <div className="w-8 h-8 rounded-full flex-shrink-0 bg-purple-200 flex items-center justify-center">
-                      <Bot className="w-5 h-5 text-purple-700" />
+    <main className="max-w-6xl mx-auto px-4 py-6">
+      <div className="bg-white rounded-lg shadow-sm min-h-[600px] flex flex-col">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={`flex gap-3 ${msg.isBot ? 'justify-start' : 'justify-end'
+                } animate-fade-in`}
+            >
+              {msg.isBot ? (
+                <div className="flex gap-3 max-w-[100%] bg-purple-50 p-4 rounded-lg">
+                  <div className="w-8 h-8 rounded-full flex-shrink-0 bg-purple-200 flex items-center justify-center">
+                    <Bot className="w-5 h-5 text-purple-700" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-medium text-purple-900">Biddasagor</p>
+                      <span className="text-xs text-gray-400">
+                        {new Date().toLocaleTimeString()}
+                      </span>
                     </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <p className="text-sm font-medium text-purple-900">Biddasagor</p>
-                        <span className="text-xs text-gray-400">
-                          {new Date().toLocaleTimeString()}
-                        </span>
-                      </div>
-                      {msg.result ? (
-                        <div className="mt-2">
-                          <div className="bg-purple-100 p-3 rounded-lg inline-block mb-3">
-                            <span className="text-xl font-bold text-purple-700">
-                              {msg.problem} = {msg.result}
-                            </span>
-                          </div>
-                          <div className="mt-2 space-y-3">
-                            <p className="text-gray-700 whitespace-pre-line leading-relaxed">
-                              {msg.message}
-                            </p>
-
-                            {msg.hasVideo && (
-                              <button
-                                className="mt-4 flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition-colors"
-                                onClick={() => setVideoModal({ isOpen: true, problem: msg.problem })}
-                              >
-                                <PlayCircle className="w-5 h-5" />
-                                Watch Visual Explanation
-                              </button>
-                            )}
-
-                          </div>
+                    {msg.result ? (
+                      <div className="mt-2">
+                        <div className="bg-purple-100 p-3 rounded-lg inline-block mb-3">
+                          <span className="text-xl font-bold text-purple-700">
+                            {msg.problem} = {msg.result}
+                          </span>
                         </div>
-                      ) : (
-                        <p className="text-gray-700 mt-1 whitespace-pre-line text-base leading-relaxed">
-                          {msg.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex flex-col items-end max-w-[90%]">
-                    <div className="bg-blue-500 text-white px-4 py-3 rounded-lg">
-                      <p className="whitespace-pre-line">{msg.message}</p>
-                    </div>
-                    <span className="text-xs text-gray-400 mt-1">
-                      {new Date().toLocaleTimeString()}
-                    </span>
-                  </div>
-                )}
-              </div>
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
+                        <div className="mt-2 space-y-3">
+                          <p className="text-gray-700 whitespace-pre-line leading-relaxed">
+                            {msg.message}
+                          </p>
 
-          <div className="border-t p-4 bg-white sticky bottom-0">
-            <form onSubmit={handleSubmit} className="flex gap-2">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Type a math problem (e.g., 12+13, 25-10, 4*6, 15÷3)..."
-                className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                autoComplete="off"
-              />
-              <button
-                type="submit"
-                className="bg-purple-600 text-white p-3 rounded-lg hover:bg-purple-700 transition-colors flex items-center justify-center"
-                disabled={!input.trim()}
-              >
-                <Send className="w-5 h-5" />
-              </button>
-            </form>
-            <div className="mt-2 text-xs text-gray-400 text-center">
-              Type a mathematical expression using +, -, *, or ÷
+                          {msg.hasVideo && (
+                            <button
+                              className="mt-4 flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition-colors"
+                              onClick={() => setVideoModal({ isOpen: true, problem: msg.problem })}
+                            >
+                              <PlayCircle className="w-5 h-5" />
+                              Watch Visual Explanation
+                            </button>
+                          )}
+
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-gray-700 mt-1 whitespace-pre-line text-base leading-relaxed">
+                        {msg.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col items-end max-w-[90%]">
+                  <div className="bg-blue-500 text-white px-4 py-3 rounded-lg">
+                    <p className="whitespace-pre-line">{msg.message}</p>
+                  </div>
+                  <span className="text-xs text-gray-400 mt-1">
+                    {new Date().toLocaleTimeString()}
+                  </span>
+                </div>
+              )}
             </div>
-          </div>
+          ))}
+          <div ref={messagesEndRef} />
         </div>
 
-        {/* Optional: Quick Action Buttons */}
-        <div className="mt-4 flex gap-2 justify-center flex-wrap">
-          <button
-            onClick={() => setInput('12+13')}
-            className="px-4 py-2 bg-white rounded-full text-sm text-gray-600 hover:bg-gray-100 transition-colors shadow-sm"
-          >
-            Addition Example
-          </button>
-          <button
-            onClick={() => setInput('25-10')}
-            className="px-4 py-2 bg-white rounded-full text-sm text-gray-600 hover:bg-gray-100 transition-colors shadow-sm"
-          >
-            Subtraction Example
-          </button>
-          <button
-            onClick={() => setInput('4*6')}
-            className="px-4 py-2 bg-white rounded-full text-sm text-gray-600 hover:bg-gray-100 transition-colors shadow-sm"
-          >
-            Multiplication Example
-          </button>
-          <button
-            onClick={() => setInput('15÷3')}
-            className="px-4 py-2 bg-white rounded-full text-sm text-gray-600 hover:bg-gray-100 transition-colors shadow-sm"
-          >
-            Division Example
-          </button>
+        <div className="border-t p-4 bg-white sticky bottom-0">
+          <form onSubmit={handleSubmit} className="flex gap-2">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type a math problem (e.g., 12+13, 25-10, 4*6, 15÷3)..."
+              className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              autoComplete="off"
+            />
+            <button
+              type="submit"
+              className="bg-purple-600 text-white p-3 rounded-lg hover:bg-purple-700 transition-colors flex items-center justify-center"
+              disabled={!input.trim()}
+            >
+              <Send className="w-5 h-5" />
+            </button>
+          </form>
+          <div className="mt-2 text-xs text-gray-400 text-center">
+            Type a mathematical expression using +, -, *, or ÷
+          </div>
         </div>
-      </main>
-      {videoModal.isOpen && (
-        <VideoExplanation
-          problem={videoModal.problem}
-          onClose={() => setVideoModal({ isOpen: false, problem: null })}
-        />
-      )}
+      </div>
+
+      {/* Optional: Quick Action Buttons */}
+      <div className="mt-4 flex gap-2 justify-center flex-wrap">
+        <button
+          onClick={() => setInput('12+13')}
+          className="px-4 py-2 bg-white rounded-full text-sm text-gray-600 hover:bg-gray-100 transition-colors shadow-sm"
+        >
+          Addition Example
+        </button>
+        <button
+          onClick={() => setInput('25-10')}
+          className="px-4 py-2 bg-white rounded-full text-sm text-gray-600 hover:bg-gray-100 transition-colors shadow-sm"
+        >
+          Subtraction Example
+        </button>
+        <button
+          onClick={() => setInput('4*6')}
+          className="px-4 py-2 bg-white rounded-full text-sm text-gray-600 hover:bg-gray-100 transition-colors shadow-sm"
+        >
+          Multiplication Example
+        </button>
+        <button
+          onClick={() => setInput('15÷3')}
+          className="px-4 py-2 bg-white rounded-full text-sm text-gray-600 hover:bg-gray-100 transition-colors shadow-sm"
+        >
+          Division Example
+        </button>
+        <button
+          onClick={() => setInput('Generate a similar question')}
+          className="px-4 py-2 bg-white rounded-full text-sm text-gray-600 hover:bg-gray-100 transition-colors shadow-sm"
+        >
+          Similar Question
+        </button>
+      </div>
+    </main>
+    {videoModal.isOpen && (
+      <VideoExplanation
+        problem={videoModal.problem}
+        onClose={() => setVideoModal({ isOpen: false, problem: null })}
+      />
+    )}
       {/* Add some CSS animations */}
       <style jsx>{`
         @keyframes fadeIn {
