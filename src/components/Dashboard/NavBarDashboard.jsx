@@ -1,10 +1,12 @@
 import { IoIosNotifications } from "react-icons/io";
+import GoogleTranslate from "../../GoogleTranslate";
 const NavBarDashboard = () => {
     return (
         <div className="w-full lg:bg-secondary/40">
             <div className="flex justify-end mr-10 items-center gap-4">
 
             <h1 className="text-3xl"><IoIosNotifications></IoIosNotifications></h1>
+            <GoogleTranslate />
 
             <div>
                 <img src="/dp-removebg-preview.png" alt="" className="rounded-full w-[50px] h-[50px]"/>

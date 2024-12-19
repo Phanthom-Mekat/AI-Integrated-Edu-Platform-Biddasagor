@@ -4,6 +4,8 @@ import { CiMenuBurger } from "react-icons/ci";
 import { CgGames } from "react-icons/cg";
 import { MdLeaderboard } from "react-icons/md";
 import { FaRobot } from "react-icons/fa6";
+
+
 const Sidebar = () => {
     // State to toggle dropdown visibility
     const [isLearnDropdownOpen, setLearnDropdownOpen] = useState(false);
@@ -15,6 +17,7 @@ const Sidebar = () => {
 
     return (
         <div className="">
+             
             <div className="drawer  lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col items-center justify-center relative top-2 -left-24 z-50">
@@ -30,6 +33,8 @@ const Sidebar = () => {
                         <Link to='/dashboard'>
                             <h1 className="text-4xl font-bold mb-10 text-center">Dashboard</h1>
                         </Link>
+
+                       
 
                             <li> <Link to='/dashboard'>
                             <div className="flex items-center text-xl font-semibold gap-2 my-5">

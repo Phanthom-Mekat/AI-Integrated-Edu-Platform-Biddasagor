@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import NavBarDashboard from "../components/Dashboard/NavBarDashboard";
+import GoogleTranslate from "../GoogleTranslate";
 
 
 const Games = () => {
@@ -14,6 +15,8 @@ const Games = () => {
                     <h1 className="text-center text-4xl font-bold">Fun & Learn</h1>
                     <p className="text-center text-lg mt-2">Explore games to sharpen your math skills while having fun!</p>
                 </div>
+
+
 
                 {/* Game Options Section */}
                 <div className="mt-12 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 px-6">
