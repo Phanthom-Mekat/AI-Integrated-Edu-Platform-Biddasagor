@@ -34,8 +34,6 @@ async function run() {
         const scoreCollection = database.collection('userScore');
         const quizCollection = database.collection('quizQuestions');
 
-
-
                 app.post("/save-game", async (req, res) => {
                     const newQuiz = req.body;
                     const result = await scoreCollection.insertOne(newQuiz);

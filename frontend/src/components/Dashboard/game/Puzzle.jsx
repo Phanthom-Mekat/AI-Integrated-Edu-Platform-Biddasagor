@@ -42,7 +42,7 @@ const PlayQuiz = () => {
         if (timeLeft === 0) {
             const saveScore = async () => {
                 try {
-                    const response = await axios.post("https://biddashagor.vercel.app/save-game", {
+                    const response = await axios.post("http://localhost:5000/save-game", {
                         userId: `${user.uid}`, 
                         userName: `${user.displayName}`,
                         score,
@@ -55,7 +55,7 @@ const PlayQuiz = () => {
     
             const saveHistory = async () => {
                 try {
-                    const response = await axios.post("https://biddashagor.vercel.app/quizResults", {
+                    const response = await axios.post("http://localhost:5000/quizResults", {
                         userId: `${user.uid}`,
                         userName: `${user.displayName}`,
                         history,
@@ -70,7 +70,7 @@ const PlayQuiz = () => {
             saveScore();
             saveHistory();
         }
-    }, [timeLeft]);
+    }, [history, score, timeLeft, user.displayName, user.uid]);
     
 
     function generateQuestion() {
