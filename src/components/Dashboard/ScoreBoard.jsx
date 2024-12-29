@@ -6,7 +6,7 @@ const ScoreBoard = () => {
     const [processedData, setProcessedData] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/userScores")
+        axios.get("https://biddashagor.vercel.app/userScores")
             .then(res => {
                 const data = res.data;
                 const aggregatedData = data.reduce((acc, user) => {
