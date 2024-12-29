@@ -4,6 +4,7 @@ import LeaderboardTable from "../components/Dashboard/LeaderboardTable";
 import FavTopics from "../components/Dashboard/FavTopics";
 import NavBarDashboard from "../components/Dashboard/NavBarDashboard";
 import LearningProgressDashboard from "../components/Dashboard/LearningProgressDashboard";
+import ScoreBoard from "../components/Dashboard/ScoreBoard";
 
 const data = [
   { day: "Mon", score: 4 },
@@ -29,13 +30,18 @@ function LeaderboardContent() {
 
       {/* Leaderboard Section */}
       <div className="bg-white rounded-lg  overflow-hidden mb-12 ">
-        <h2 className="text-2xl md:text-3xl font-semibold text-center py-6 text-primary">
-          Top Achievers
-        </h2>
-        <LeaderboardTable />
-        <div className="mt-10"></div>
+        
+
+        <div className="py-5">
+        <ScoreBoard></ScoreBoard>
+      </div>
+
+        {/* <LeaderboardTable /> */}
+        <div ></div>
        <LearningProgressDashboard></LearningProgressDashboard>
       </div>
+
+
 
       {/* Statistics Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

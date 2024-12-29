@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
+import { AuthContext } from "../../../provider/AuthProvider";
 import {
     Star,
     Clock,
@@ -9,6 +10,7 @@ import {
     MinusCircle,
     XCircle
 } from "lucide-react";
+import axios from "axios";
 
 const PlayQuiz = () => {
     const [score, setScore] = useState(0);
@@ -16,6 +18,9 @@ const PlayQuiz = () => {
     const [question, setQuestion] = useState(generateQuestion());
     const [input, setInput] = useState("");
     const [history, setHistory] = useState([]);
+    const {user} = useContext(AuthContext)
+
+    console.log(history);
 
     useEffect(() => {
         if (timeLeft > 0) {
@@ -32,6 +37,41 @@ const PlayQuiz = () => {
             });
         }
     }, [timeLeft]);
+
+    useEffect(() => {
+        if (timeLeft === 0) {
+            const saveScore = async () => {
+                try {
+                    const response = await axios.post("http://localhost:5000/save-game", {
+                        userId: `${user.uid}`, 
+                        userName: `${user.displayName}`,
+                        score,
+                    });
+                    console.log("Score saved:", response.data.message);
+                } catch (err) {
+                    console.error("Error saving score:", err);
+                }
+            };
+    
+            const saveHistory = async () => {
+                try {
+                    const response = await axios.post("http://localhost:5000/quizResults", {
+                        userId: `${user.uid}`,
+                        userName: `${user.displayName}`,
+                        history,
+                    });
+                    console.log("History saved:", response.data.message);
+                } catch (err) {
+                    console.error("Error saving history:", err);
+                }
+            };
+    
+            // Call both APIs
+            saveScore();
+            saveHistory();
+        }
+    }, [timeLeft]);
+    
 
     function generateQuestion() {
         const num1 = Math.floor(Math.random() * 10) + 1;
