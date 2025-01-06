@@ -20,6 +20,7 @@ import LearnAdditions from "../components/Dashboard/Math/LearnAdditions";
 import Addition from "../pages/Addition";
 import GameIframe from "../pages/GameIframe";
 import AdaptiveGame from "../pages/AdaptiveGame";
+import Practice from "../pages/Practice";
 
 const router = createBrowserRouter([
     {
@@ -95,6 +96,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/adaptive',
                 element: <AdaptiveGame></AdaptiveGame>
+            },
+            {
+                path: '/dashboard/practice',
+                element: <Practice/>
             }
         ],
     },
