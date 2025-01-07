@@ -21,6 +21,7 @@ import Addition from "../pages/Addition";
 import GameIframe from "../pages/GameIframe";
 import AdaptiveGame from "../pages/AdaptiveGame";
 import Practice from "../pages/Practice";
+import MathProblems from "../components/Dashboard/practice/basicVersion/MainPage";
 
 const router = createBrowserRouter([
     {
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/practice',
                 element: <Practice/>
+            },
+            {
+                path: '/dashboard/basicPracticePage',
+                element: <MathProblems></MathProblems>
             }
         ],
     },

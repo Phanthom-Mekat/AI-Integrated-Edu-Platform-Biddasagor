@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { WelcomeScreen } from '../components/Dashboard/practice/WelcomeScreen'
 import { MathQuiz } from '../components/Dashboard/practice/MathQuiz'
 import { FinalScoreScreen } from '../components/Dashboard/practice/FinalScoreScreen'
+import { WelcomeCard } from '../components/Dashboard/practice/basicVersion/WelcomeCard'
 
 
 export default function Practice() {
@@ -29,6 +30,9 @@ export default function Practice() {
       {gameState === 'welcome' && <WelcomeScreen onStart={startQuiz} />}
       {gameState === 'playing' && <MathQuiz difficulty={difficulty} onFinish={endQuiz} />}
       {gameState === 'finished' && <FinalScoreScreen score={finalScore} onRestart={restartQuiz} />}
+     <div className='p-5'>
+     {gameState !== 'playing' && <WelcomeCard onStart={startQuiz} />}
+     </div>
     </div>
   )
 }
