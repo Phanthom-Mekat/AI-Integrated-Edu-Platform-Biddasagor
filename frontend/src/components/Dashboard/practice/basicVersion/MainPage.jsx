@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Check, X, Brain, Star, Trophy } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Check, X, Brain, Star, Trophy, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Thermometer from './Thermometer';
 
@@ -18,19 +18,25 @@ const MathProblems = () => {
     { id: 10, question: "What is 25 - 8?", answer: "17" }
   ];
 
-  const [answers, setAnswers] = useState({});
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answer, setAnswer] = useState('');
   const [score, setScore] = useState(0);
+  const [isCorrect, setIsCorrect] = useState(false);
 
-  const handleAnswerChange = (id, value) => {
-    setAnswers(prev => {
-      const newAnswers = { ...prev, [id]: value };
-      // Calculate new score
-      const newScore = Object.entries(newAnswers).reduce((acc, [qId, ans]) => {
-        return acc + (ans === problems.find(p => p.id === parseInt(qId))?.answer ? 1 : 0);
-      }, 0);
-      setScore(newScore);
-      return newAnswers;
-    });
+  const handleAnswerChange = (value) => {
+    setAnswer(value);
+    if (value === problems[currentQuestion].answer) {
+      setIsCorrect(true);
+      setScore(prev => prev + 1);
+      // Wait for 1 second before moving to next question
+      setTimeout(() => {
+        if (currentQuestion < problems.length - 1) {
+          setCurrentQuestion(prev => prev + 1);
+          setAnswer('');
+          setIsCorrect(false);
+        }
+      }, 1000);
+    }
   };
 
   return (
@@ -39,80 +45,81 @@ const MathProblems = () => {
       <motion.div 
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="max-w-3xl mx-auto text-center mb-12 "
+        className="max-w-3xl mx-auto text-center mb-12"
       >
-        <div className="flex items-center justify-center gap-3 mb-4 ">
+        <div className="flex items-center justify-center gap-3 mb-4">
           <Brain className="w-10 h-10 text-purple-600" />
           <h1 className="text-4xl font-bold text-purple-600">Practice Problems</h1>
         </div>
-        <div className="bg-white rounded-full px-6 py-3 inline-flex items-center gap-2 shadow-lg ">
+        <div className="bg-white rounded-full px-6 py-3 inline-flex items-center gap-2 shadow-lg">
           <Trophy className="w-6 h-6 text-yellow-500" />
-          <span className="text-xl font-bold ">Score: {score}/10</span>
+          <span className="text-xl font-bold">Score: {score}/10</span>
         </div>
       </motion.div>
 
-     
+      <div className='flex gap-2'>
+        <div className="space-y-6 w-1/2 mx-auto">
+          <AnimatePresence mode='wait'>
+            <motion.div
+              key={currentQuestion}
+              initial={{ x: 300, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -300, opacity: 0 }}
+              className="bg-white rounded-2xl p-6 shadow-lg"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <Star className="w-6 h-6 text-yellow-500" />
+                <h3 className="text-xl font-bold text-gray-700">
+                  Question {currentQuestion + 1}
+                </h3>
+              </div>
+              
+              <p className="text-2xl text-gray-800 mb-3">{problems[currentQuestion].question}</p>
+              
+              <div className="flex items-center gap-3">
+                <div>Answer:</div>
+                <input
+                  type="text"
+                  value={answer}
+                  onChange={(e) => handleAnswerChange(e.target.value)}
+                  className="w-2/3 px-4 py-2 text-2xl text-center border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none"
+                  placeholder="?"
+                  disabled={isCorrect}
+                />
+                
+                {answer && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="ml-2"
+                  >
+                    {isCorrect ? (
+                      <Check className="w-8 h-8 text-green-500" />
+                    ) : (
+                      <X className="w-8 h-8 text-red-500" />
+                    )}
+                  </motion.div>
+                )}
+              </div>
 
-      {/* Questions */}
-    
+              {isCorrect && currentQuestion < problems.length - 1 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="mt-4 text-center text-green-600"
+                >
+                  <ArrowRight className="w-6 h-6 mx-auto animate-bounce" />
+                  Next question coming up...
+                </motion.div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-      <div className='flex gap-2 '>
-
-      <div  className="space-y-6 w-1/2 mx-auto ">
-  
-  {problems.map((problem, index) => (
-    <motion.div
-      key={problem.id}
-      initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ delay: index * 0.1 }}
-      className="bg-white rounded-2xl p-6 shadow-lg"
-    >
-      <div className="flex items-center gap-3 mb-4">
-        <Star className="w-6 h-6 text-yellow-500" />
-        <h3 className="text-xl font-bold text-gray-700">
-          Question {problem.id}
-        </h3>
-      </div>
-      
-      <p className="text-2xl text-gray-800 mb-3">{problem.question}</p>
-      
-      <div className="flex items-center gap-3">
-          <div>Answer:</div>
-        <input
-          type="text"
-          value={answers[problem.id] || ''}
-          onChange={(e) => handleAnswerChange(problem.id, e.target.value)}
-          className="w-2/3 px-4 py-2 text-2xl text-center border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none"
-          placeholder="?"
-        />
-        
-        {answers[problem.id] && (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            className="ml-2"
-          >
-            {answers[problem.id] === problem.answer ? (
-              <Check className="w-8 h-8 text-green-500" />
-            ) : (
-              <X className="w-8 h-8 text-red-500" />
-            )}
-          </motion.div>
-        )}
-      </div>
-    </motion.div>
-  ))}
-</div>
-
-        <div className='w-1/3 '>
-
-          
-        <Thermometer score={score} />
+        <div className='w-1/3'>
+          <Thermometer score={score} />
         </div>
       </div>
-    
-    
 
       {/* Celebration when all answers are correct */}
       {score === 10 && (
@@ -128,7 +135,11 @@ const MathProblems = () => {
             <p className="text-xl text-gray-700 py-5">
               You're a Math Superstar!
             </p>
-            <Link to="/dashboard/practice" ><button className='btn '>Practice again</button></Link>
+            <Link to="/dashboard/practice">
+              <button className='px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors'>
+                Practice again
+              </button>
+            </Link>
           </div>
         </motion.div>
       )}
