@@ -1,4 +1,5 @@
 # AI-Integrated-Edu-Platform-Biddasagor
+[Biddasagor](https://biddyasagor.dndlab.xyz)
 
 ## Overview
 AI-Integrated-Edu-Platform-Biddasagor is an innovative educational platform that leverages artificial intelligence to enhance the learning experience. This platform is designed to provide interactive and personalized educational content to learners of all ages, fostering a more engaging and effective learning environment.
