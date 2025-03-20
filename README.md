@@ -15,7 +15,7 @@ AI-Integrated-Edu-Platform-Biddasagor is an innovative educational platform that
 ## Technologies Used
 - **JavaScript:** The primary programming language used in the development of the platform, ensuring a robust and dynamic user experience.
 - **Other:** Additional technologies and tools used to support the platform's functionality and performance.
-
+-
 ## Getting Started
 To get a local copy up and running, follow these steps:
 
