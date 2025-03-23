@@ -4,6 +4,7 @@
 ## Overview
 AI-Integrated-Edu-Platform-Biddasagor is an innovative educational platform that leverages artificial intelligence to enhance the learning experience. This platform is designed to provide interactive and personalized educational content to learners of all ages, fostering a more engaging and effective learning environment.
 
+
 ## Features
 - **Personalized Learning Paths:** Tailors educational content to individual learning styles and paces, ensuring each learner receives the most relevant and effective instruction.
 - **Interactive Lessons:** Engages learners with interactive lessons, quizzes, and multimedia content to make learning more dynamic and enjoyable.
