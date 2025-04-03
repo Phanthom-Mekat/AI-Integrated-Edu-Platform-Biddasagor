@@ -9,13 +9,10 @@
 Biddasagor is a web application built with React and Vite. It leverages modern JavaScript libraries and tools to provide a seamless development experience with features like Hot Module Replacement (HMR) and linting support.
 
 ## Features
-
 - **React**: A JavaScript library for building user interfaces.
 - **Vite**: A fast build tool and development server.
 - **HMR**: Hot Module Replacement for efficient development.
 - **ESLint**: Linting for maintaining code quality.
-
-
 
 ## Installation
 
