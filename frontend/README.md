@@ -16,6 +16,7 @@ Biddasagor is a web application built with React and Vite. It leverages modern J
 - **ESLint**: Linting for maintaining code quality.
 
 
+
 ## Installation
 
 To get started with Biddasagor, clone the repository and install the dependencies:
